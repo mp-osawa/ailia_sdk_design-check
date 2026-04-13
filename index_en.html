@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="color-scheme" content="light">
+ <title>ailia SDK — Edge AI Inference Framework</title>
+  <meta name="description" content="Powered by Vulkan & Metal.400+ models. Ready to run.Edge AI Inference SDK.">
+<!-- Open Graph protocol metadata start-->
+<meta property="og:site_name" content="ailia SDK ｜ailia AI Series" />
+<meta property="og:title" content="ailia SDK ｜ailia AI Series" />
+<meta property="og:description" content="Powered by Vulkan & Metal.400+ models. Ready to run.Edge AI Inference SDK." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ailia.ai/sdk/" />
+<meta property="og:image" content="https://ailia.ai/sdk/img/img_OGP_en.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+ <link rel="stylesheet" property="stylesheet" href="css/common.css" media="all">
+ <link rel="stylesheet" href="css/header.css">
+ <link rel="stylesheet" href="css/style.css">
+
+ <link rel="icon" type="image/png" href="img/favicon.png" sizes="16x16">
+ <link rel="apple-touch-icon" href="img/favicon.png" sizes="180x180">
+ <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="js/smoothScroll.js"></script>
+	<script type="text/javascript" src="js/top.js"></script>
+	<script type="text/javascript" src="js/spnavi.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/profmodal.js"></script>
+	<script type="text/javascript" src="js/move.js"></script>
+	<script type="text/javascript" src="js/mp_config.js"></script>
+	<script type="text/javascript" src="js/mp_fileio.js"></script>
+	<script type="text/javascript" src="js/mp_lib.js"></script>
+	<script type="text/javascript" src="js/chatwindow.js"></script>
+	<script type="text/javascript" src="js/jquery-modal-video.min.js"></script>
+    <script type="text/javascript" src="js/top_blog.js"></script>
+    <script type="text/javascript" src="js/ailia_dx_chat.js"></script>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+    <header id="header">
+        <nav>
+            <div class="navArea">
+                <div class="inner cw">
+                    <h1>
+                        <a class="navLogo" href="/"><img class="" src="img/common/logo.svg" alt="ailia">
+                            <span class="siteTitle">ailia</span>
+                        </a>
+                    </h1>
+                    <ul class="navList">
+                        <li>
+                            <a href="/" class="">ailia AI Series</a>
+                        </li>
+                        <li>
+                            <a href="/ai-computing/" class="ai-computing">AI Computing</a>
+                        </li>
+                        <li>
+                            <a href="/ai-application/" class="ai-application current">AI Applications</a>
+                        </li>
+                        <li>
+                            <a href="/company/" class="company">Company</a>
+                        </li>
+                        <li class="lang">
+                            <a href="/ai-application/" lang="jp">JP</a>
+                            <a href="index_en.html" class="current" lang="en">EN</a>
+                        </li>
+                        <li class="contact">
+                            <a class="" href="https://ailia.ai/contact/" target="_blank">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="https://ailia.ai/contact/" target="_blank" class="spContact">Contact</a>
+                <a class="spNavBtn" href="javascript:void(0);"><span></span><span></span><span></span></a>
+            </div>
+        </nav>
+  </div>
+</header>
+
+<!-- subnav -->
+<div id="subNavArea">
+  <a href="#hero" class="subNavTitle">ailia SDK</a>
+  <div class="site-menu-inner">
+    <nav class="site-menu">
+      <ul>
+        <li><a href="#cases">Use Cases</a></li>
+        <li><a href="#comparison">vs ONNX Runtime</a></li>
+        <li><a href="#stack">ailia AI Libraries</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- ============================================================
+     あいにゃん
+     ============================================================ -->
+        <div id="chatbtn">
+            <div class="chatbtnbox chatopen">
+                <div class="chatbtnwindow">I'll answer anything about ainyan ailia.</div>
+                <div class="chara">
+                    <canvas id="avatar" width="256" height="256"></canvas>
+                    <img src="img/chara_sp.png" width="108" height="109" alt="あいにゃん" class="sp">
+                </div>
+            </div>
+            <div class="btnclose chatclose">Close</div>
+            <div class="btnprof profopen">Profile</div>
+        </div>
+        <div id="chatwindow">
+            <div class="aichatinner">
+                <!-- チャット部分 -->
+                <div class="logarea">
+                    <div class="loghead">
+                        <div class="logtitle">Ainyan Chat BOT (automatic response)</div>
+                        <div id="chatclose" class="winclose">Close</div>
+                    </div>
+                    <div class="logbody" id="logbody">
+                        <div class="logtext">
+                            <div id="chat"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chatarea">
+                    <div class="chatbody">
+                        <form name="chat_form" action="javascript:chat_api('https://ailia-llm-insight.uw.r.appspot.com/');">
+                            <div class="chatformbox">
+                                <input type="text" name="prompt" id="prompt" size="40" placeholder="Please enter your question here (e.g., what is ailia)">
+                            </div>
+                            <div class="chatbutton">
+                                <button type="button" onclick="chat_api('https://ailia-llm-insight.uw.r.appspot.com/')">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- CHARAPROF -->
+        <div id="profmodal">
+            <div class="profbg"></div>
+            <div class="profwindow">
+                <div class="profinner">
+                    <div class="profclose">Close.</div>
+                    <div class="pic"><img src="img/chara_detail_pic.png" width="447" height="574" alt=""></div>
+                    <div class="textarea">
+                        <div class="label">ailia brand official character</div>
+                        <div class="name">Ai-nyan</div>
+                        <div class="text">AI knows about the mysterious creature "◯◯danya" that came from the future, but it doesn't seem to be a cat. It provides information about ailia brand products and services. [Favorite food] Cat food.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--============================================================
+     HERO
+     ============================================================ -->
+<section id="hero" class="hero">
+  <!-- Background image -->
+  <div class="hero__bg" aria-hidden="true">
+    <img src="img/img_mv.png" alt="" class="hero__bg-img">
+  </div>
+  <div class="container">
+    <div class="hero__inner">
+      <h1 class="hero__title">
+       <span class="em">ailia SDK</span><br>
+        Powered by Vulkan &amp; Metal.<br>
+        400+ models.<br>Ready to run.<br>
+        Edge AI Inference SDK.
+      </h1>
+      <p class="hero__lead">An inference SDK for developers who want to run AI outside of Python — in embedded systems, mobile, and games. Includes audio, LLM, and tracking libraries for Unity, Kotlin, and C++, enabling end-to-end edge AI application development.</p>
+      <div class="hero__actions">
+        <a href="#pricing" class="btn btn--primary">Free Trial<svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+  </svg></a>
+        <a href="#stack" class="btn btn--ghost">Library List<svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+  </svg></a>
+  <p class="hero__meta">
+        400+ pretrained models included<br>
+        Windows / macOS / Linux / iOS / Android / Jetson / Raspberry Pi
+      </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SHOWCASE / Demo App
+     ============================================================ -->
+<section id="showcase" class="showcase">
+  <div class="container section-pad">
+    <h2 class="showcase__heading">Try It in Action</h2>
+    <div class="showcase__card">
+      <div class="showcase__left">
+        <h3 class="showcase__title">ailia Demo App</h3>
+        <p class="showcase__desc">Experience AI powered by ailia SDK right now — object detection, pose estimation, super resolution, speech recognition, speech synthesis, LLM, and more.</p>
+        <div class="showcase__btns">
+          <a href="https://apps.apple.com/jp/app/ailia-ai-showcase/id1522828798" target="_blank" class="showcase__store-btn">
+            <img src="img/badge_appstore_en.svg" alt="Download on the App Store">
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=jp.axinc.ailia_ai_showcase" target="_blank" class="showcase__store-btn">
+            <img src="img/badge_googleplay_en.svg" alt="Get it on Google Play">
+          </a>
+        </div>
+      </div>
+      <div class="showcase__right">
+        <img src="img/img_showcase.png" alt="ailia AI Showcase app screenshot" class="showcase__screen">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PAIN vs SOLUTION
+     ============================================================ -->
+<section id="pain" class="pain">
+  <div class="container section-pad">
+    <div class="pain__grid">
+
+      <!-- Problem column -->
+      <div class="pain__col">
+        <div class="pain__col-header pain__col-header--problem">
+          Real Challenges in Edge AI Development
+        </div>
+        <ul class="pain__list">
+          <li class="pain__item">
+            <img src="img/icon_cross.svg" alt="" class="pain__icon">
+            <span>Need to run AI in offline environments — factories, vehicles, and field sites without network access</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_cross.svg" alt="" class="pain__icon">
+            <span>Cloud APIs charge per inference — costs explode at scale</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_cross.svg" alt="" class="pain__icon">
+            <span>Sensitive data — images, audio, documents — cannot be sent outside the organization</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_cross.svg" alt="" class="pain__icon">
+            <span>Python AI libraries (Transformers, etc.) can't be used from Unity or Kotlin</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Center arrow -->
+      <div class="pain__arrow" aria-hidden="true">
+        <img src="img/pain__arrow.svg">
+      </div>
+
+      <!-- Solution column -->
+      <div class="pain__col">
+        <div class="pain__col-header pain__col-header--solution">
+          Solved with ailia SDK
+        </div>
+        <ul class="pain__list">
+          <li class="pain__item">
+            <img src="img/icon_check.svg" alt="" class="pain__icon">
+            <span>Fully offline inference — no network required, runs entirely on device</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_check.svg" alt="" class="pain__icon">
+            <span>License fee only — no per-inference or per-user charges</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_check.svg" alt="" class="pain__icon">
+            <span>All processing stays on device — data never leaves your environment</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_check.svg" alt="" class="pain__icon">
+            <span>ailia Tokenizer / Speech / LLM / Tracker available for Unity, Kotlin, and C++</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CASES (ACCORDION)
+     ============================================================ -->
+<section id="cases" class="cases">
+  <div class="container">
+    <p class="cases__label">Use Cases (Selected)</p>
+    <div class="cases__list">
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">Manga &amp; Illustration</span>
+          <span class="accordion__title">CLIP STUDIO PAINT × ailia SDK</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">ailia SDK was adopted for AI inference in the Smart Smoothing feature, providing a cross-platform, GPU-accelerated inference engine.</p>
+          <a href="https://www.axell.co.jp/business/case/detail_02.html" target="_blank" class="accordion__link">View details →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">Manga &amp; Illustration (Android)</span>
+          <span class="accordion__title">CLIP STUDIO PAINT for Galaxy × ailia SDK</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">Achieved Smart Smoothing on Galaxy devices through a proprietary high-speed inference implementation using Vulkan on Android.</p>
+          <a href="https://www.axell.co.jp/business/case/detail_01.html" target="_blank" class="accordion__link">View details →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">Automotive · ADAS</span>
+          <span class="accordion__title">Next-gen In-vehicle PoC × AI Solution</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">Real-time driver state detection via a steering-wheel camera — no cloud connection required. Multiple AI models for face, gaze, and posture run simultaneously.</p>
+          <a href="https://www.axell.co.jp/business/case/detail_04.html" target="_blank" class="accordion__link">View details →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">Autonomous Mobility</span>
+          <span class="accordion__title">Partner Mobility × ailia SDK</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">Adopted for NTT Docomo's autonomous wheelchair initiative. Obstacle detection and privacy masking run in real time on the edge.</p>
+          <a href="https://www.axell.co.jp/business/case/detail_08.html" target="_blank" class="accordion__link">View details →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">Sports · Venue Experience</span>
+          <span class="accordion__title">JFA blue-ing! × ailia SDK</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">AI implementation at a soccer experience facility in Tokyo Dome City. FaceSwap, video generation, and LLM dialogue are unified under ailia SDK for long-term stable operation.</p>
+          <a href="https://ailia.ai/case/blueing/" target="_blank" class="accordion__link">View details →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">Digital Asset Management</span>
+          <span class="accordion__title">CIERTO × ailia SDK (VPJ)</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">AI-powered features — including automatic metadata input and similar image search — were added to the DAM system "CIERTO" using ailia SDK.</p>
+          <a href="https://www.vpj.co.jp/news/pressrelease/detail.html?pid=253" target="_blank" class="accordion__link">View details →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">Embedded · Semiconductor</span>
+          <span class="accordion__title">NSITEXE DR1000C × ailia SDK</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">ailia TFLite Runtime was implemented on DENSO's RISC-V processor DR1000C, enabling AI inference in Non-OS and RTOS environments.</p>
+          <a href="https://prtimes.jp/main/html/rd/p/000000044.000004053.html" target="_blank" class="accordion__link">View details →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">Art · Experiential Pavilion</span>
+          <span class="accordion__title">EXPO 2025 Osaka · Kansai World Expo — null² (Yoichi Ochiai)</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">Speech recognition, speech synthesis, low-latency edge AI, and generative AI were all implemented with ailia SDK, powering an interactive pavilion that welcomed hundreds of thousands of visitors.</p>
+          <a href="https://blog.ailia.ai/dialogue/expo-2025_ochiaiyoichi/" target="_blank" class="accordion__link">View details →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMPARISON TABLE
+     ============================================================ -->
+<section id="comparison" class="comparison">
+  <div class="container section-pad">
+    <p class="section-label">Comparison with ONNX Runtime</p>
+    <h2 class="section-title">Why ailia SDK Outperforms<br>a General-Purpose Runtime</h2>
+    <p class="section-desc">Because every library is developed in-house, ailia SDK can be deeply optimized for specific devices and models — covering areas that general-purpose designs struggle with, such as direct Vulkan/Metal implementation and model-specific tuning.</p>
+    <div class="comparison__table-wrap">
+      <table class="comparison__table">
+        <thead>
+          <tr>
+            <th class="col-feature"></th>
+            <th class="col-ailia">ailia SDK</th>
+            <th class="col-ort">ONNX Runtime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">GPU Inference via Native Vulkan &amp; Metal</div>
+              <div class="comparison__feature-desc">Android/Windows/Linux (Vulkan), iOS/macOS (direct Metal implementation)</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--no"><img src="img/icon_cross2.svg" alt="✗" class="comparison__icon"></td>
+          </tr>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">Speech, TTS, LLM, Tokenizer &amp; Tracking Libraries</div>
+              <div class="comparison__feature-desc">ailia Speech / Voice / LLM / Tokenizer / Tracker — Unity, Flutter, C++ support</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--no"><img src="img/icon_cross2.svg" alt="✗" class="comparison__icon"></td>
+          </tr>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">400+ Official Model Library</div>
+              <div class="comparison__feature-desc">Validated models with sample code, ready to run immediately</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--no"><img src="img/icon_cross2.svg" alt="✗" class="comparison__icon"></td>
+          </tr>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">Non-OS / RTOS Support</div>
+              <div class="comparison__feature-desc">In-house libraries enable support for arbitrary OS environments</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--no"><img src="img/icon_cross2.svg" alt="✗" class="comparison__icon"></td>
+          </tr>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">Official Unity Bindings + Model Collection</div>
+              <div class="comparison__feature-desc">Pick a model and deploy instantly for games and XR</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--part"><img src="img/icon_trigone.svg" alt="△" class="comparison__icon"></td>
+          </tr>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">Model-Specific Optimization</div>
+              <div class="comparison__feature-desc">In-house libraries enable deep optimization for specific models and devices</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--part"><img src="img/icon_trigone.svg" alt="△" class="comparison__icon"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="comparison__footnote">△ = Supported but optimization is limited due to general-purpose implementation &nbsp;※ Based on our own research</p>
+    <p class="comparison__note">We officially provide a complete library suite — from LLM tokenization to object tracking — for non-Python environments including Unity, Kotlin, and C++.</p>
+    <div class="comparison__links">
+      <a href="https://github.com/axinc-ai/ailia-models" target="_blank" class="btn btn--ghost">ailia MODELS (Python) →</a>
+      <a href="https://github.com/axinc-ai/ailia-models-unity" target="_blank" class="btn btn--ghost">ailia MODELS Unity →</a>
+      <a href="https://github.com/ailia-ai/ailia-models-kotlin" target="_blank" class="btn btn--ghost">ailia MODELS Kotlin →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     AI LIBRARY STACK
+     ============================================================ -->
+<section id="stack" class="stack">
+  <div class="container section-pad">
+    <p class="section-label">ailia AI Library Suite</p>
+    <h2 class="section-title">Build Fully Offline AI Apps<br>End-to-End</h2>
+    <p class="section-desc">ailia SDK is the inference engine. Combine it with dedicated libraries for speech recognition, speech synthesis, and LLM — and you have a complete AI product with zero cloud dependency.</p>
+
+    <!-- Core SDK banner -->
+    <div class="stack__core-banner">
+      <div class="stack__core-badge">
+        <span>CORE</span>
+        <span>SDK</span>
+      </div>
+      <div class="stack__core-body">
+        <h3 class="stack__core-title">ailia SDK</h3>
+        <p class="stack__core-desc">Cross-platform · GPU acceleration · 400+ models · ONNX / TFLite</p>
+      </div>
+    </div>
+
+    <!-- Library cards -->
+    <div class="stack__libs">
+
+      <div class="lib-card lib-card--speech">
+        <div class="lib-card__header">
+          <h4 class="lib-card__name">ailia AI Speech</h4>
+          <span class="lib-card__tag">Speech Recognition Library</span>
+        </div>
+        <p class="lib-card__desc">Offline speech recognition based on OpenAI Whisper. Supports 99 languages. Available for Unity, C++, and Flutter.</p>
+        <div class="lib-card__img">
+          <img src="img/img_aispeech.svg" alt="ailia AI Speech">
+        </div>
+        <a href="https://www.ailia.ai/speech" target="_blank" class="lib-card__link">Learn more →</a>
+      </div>
+
+      <div class="lib-card lib-card--voice">
+        <div class="lib-card__header">
+          <h4 class="lib-card__name">ailia AI Voice</h4>
+          <span class="lib-card__tag">Speech Synthesis Library</span>
+        </div>
+        <p class="lib-card__desc">Offline TTS based on GPT-SoVITS. Clone a voice from just 10 seconds of audio. Available for Unity and Flutter.</p>
+        <div class="lib-card__img">
+          <img src="img/img_aivoice.svg" alt="ailia AI Voice">
+        </div>
+        <a href="https://www.ailia.ai/voice" target="_blank" class="lib-card__link">Learn more →</a>
+      </div>
+
+      <div class="lib-card lib-card--llm">
+        <div class="lib-card__header">
+          <h4 class="lib-card__name">ailia LLM</h4>
+          <span class="lib-card__tag">Local LLM Library</span>
+        </div>
+        <p class="lib-card__desc">Run GGUF-format LLMs on device. Supports Llama 3, Gemma 2, and Qwen. Available for C++, Unity, and Flutter.</p>
+        <div class="lib-card__img">
+          <img src="img/img_llm.svg" alt="ailia LLM">
+        </div>
+        <a href="https://www.ailia.ai/llm" class="lib-card__link">Learn more →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     USE CASES (TABS)
+     ============================================================ -->
+<section id="usecases" class="usecases">
+  <div class="container section-pad">
+    <p class="section-label">Industry Use Cases</p>
+    <h2 class="section-title">What Will You Build?</h2>
+    <p class="section-desc">Select an industry to see how ailia SDK solves real-world challenges.</p>
+
+    <div class="usecases__wrap">
+      <!-- Tabs -->
+      <div class="usecases__tabs">
+        <button class="usecases__tab usecases__tab--active" onclick="switchTab(0)">Manufacturing</button>
+        <button class="usecases__tab" onclick="switchTab(1)">Automotive · ADAS</button>
+        <button class="usecases__tab" onclick="switchTab(2)">Surveillance</button>
+        <button class="usecases__tab" onclick="switchTab(3)">Games · Media</button>
+        <button class="usecases__tab" onclick="switchTab(4)">Healthcare</button>
+      </div>
+
+      <!-- Panels -->
+      <div class="usecases__panels">
+
+        <div class="usecases__panel usecases__panel--active">
+          <div class="usecase__info">
+            <p class="usecase__industry">Manufacturing · Quality Inspection</p>
+            <h3 class="usecase__title">Defect Detection on the Production Line — No Cloud Required</h3>
+            <p class="usecase__desc">Run anomaly detection models directly on an embedded board attached to a camera. No network needed — factory data stays on-premises.</p>
+            <div class="usecase__chips">
+              <span class="usecase__chip">PaDiM</span>
+              <span class="usecase__chip">Anomaly Detection</span>
+              <span class="usecase__chip">YOLOv9</span>
+            </div>
+          </div>
+          <hr class="usecase__divider">
+          <div class="usecase__models">
+            <p class="usecase__models-label">Models Used — ailia MODELS</p>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/anomaly_detection/padim" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_search.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">PaDiM</div><div class="model-link__cat">anomaly_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/anomaly_detection/patchcore" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_search.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">PatchCore</div><div class="model-link__cat">anomaly_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/object_detection/yolov9" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_object.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">YOLOv9</div><div class="model-link__cat">object_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+          </div>
+        </div>
+
+        <div class="usecases__panel">
+          <div class="usecase__info">
+            <p class="usecase__industry">Automotive · ADAS · Driver Monitoring</p>
+            <h3 class="usecase__title">Drowsiness &amp; Distraction Detection on OEM SoCs</h3>
+            <p class="usecase__desc">Real-time eye and head pose analysis using MediaPipe-based models. Supports Qualcomm, NXP, and TI SoCs for direct integration into in-vehicle hardware.</p>
+            <div class="usecase__chips">
+              <span class="usecase__chip">MediaPipe Iris</span>
+              <span class="usecase__chip">Pose Estimation</span>
+              <span class="usecase__chip">Face Detection</span>
+              <span class="usecase__chip">ailia Voice (Alert Audio)</span>
+            </div>
+          </div>
+          <hr class="usecase__divider">
+          <div class="usecase__models">
+            <p class="usecase__models-label">Models Used — ailia MODELS</p>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/eye_tracking/mediapipe_iris" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_eyetracking.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">MediaPipe Iris</div><div class="model-link__cat">eye_tracking</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/face_detection" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_facedetection.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Face Detection</div><div class="model-link__cat">face_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/pose_estimation" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_pose.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Pose Estimation</div><div class="model-link__cat">pose_estimation</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+          </div>
+        </div>
+
+        <div class="usecases__panel">
+          <div class="usecase__info">
+            <p class="usecase__industry">Security · Surveillance Camera</p>
+            <h3 class="usecase__title">Reduce Server Costs and Privacy Risk with Edge Processing</h3>
+            <p class="usecase__desc">Person detection and crowd counting run entirely on the camera device. No video upload required — only event metadata is transmitted, minimizing privacy exposure.</p>
+            <div class="usecase__chips">
+              <span class="usecase__chip">Person Detection</span>
+              <span class="usecase__chip">Crowd Counting</span>
+              <span class="usecase__chip">NSFW Detector</span>
+            </div>
+          </div>
+          <hr class="usecase__divider">
+          <div class="usecase__models">
+            <p class="usecase__models-label">Models Used — ailia MODELS</p>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/object_detection" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_object.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Object Detection</div><div class="model-link__cat">object_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/crowd_counting" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_crowd.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Crowd Counting</div><div class="model-link__cat">crowd_counting</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/image_classification/clip_nsfw" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_clip.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">CLIP-based NSFW Detector</div><div class="model-link__cat">image_classification</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+          </div>
+        </div>
+
+        <div class="usecases__panel">
+          <div class="usecase__info">
+            <p class="usecase__industry">Games · Media · Interactive AI</p>
+            <h3 class="usecase__title">Real-Time AI Characters Bundled Directly into Game Builds</h3>
+            <p class="usecase__desc">ailia SDK is trusted by CLIP STUDIO PAINT and SEGA. Combine ailia LLM + ailia AI Voice to create fully offline NPCs that can hold conversations in real time.</p>
+            <div class="usecase__chips">
+              <span class="usecase__chip">ailia LLM (Dialogue)</span>
+              <span class="usecase__chip">ailia AI Voice (TTS)</span>
+              <span class="usecase__chip">Pose Estimation</span>
+              <span class="usecase__chip">Super Resolution</span>
+            </div>
+          </div>
+          <hr class="usecase__divider">
+          <div class="usecase__models">
+            <p class="usecase__models-label">Models Used — ailia MODELS</p>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/pose_estimation" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_pose.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Pose Estimation</div><div class="model-link__cat">pose_estimation</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/super_resolution" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_resolution.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Super Resolution</div><div class="model-link__cat">super_resolution</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/background_removal" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_bgremoval.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Background Removal</div><div class="model-link__cat">background_removal</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+          </div>
+        </div>
+
+        <div class="usecases__panel">
+          <div class="usecase__info">
+            <p class="usecase__industry">Healthcare · Regulated Devices</p>
+            <h3 class="usecase__title">AI-Assisted Diagnosis with Encrypted Models to Protect Patient Data</h3>
+            <p class="usecase__desc">Model encryption protects diagnostic AI IP. Fully offline inference ensures patient data never leaves the device — privacy protection and data residency requirements are built in from the start.</p>
+            <div class="usecase__chips">
+              <span class="usecase__chip">Medical Image Segmentation</span>
+              <span class="usecase__chip">Anomaly Detection</span>
+              <span class="usecase__chip">ailia AI Speech (Voice Memo)</span>
+              <span class="usecase__chip">Model Encryption</span>
+            </div>
+          </div>
+          <hr class="usecase__divider">
+          <div class="usecase__models">
+            <p class="usecase__models-label">Models Used — ailia MODELS</p>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/anomaly_detection" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_search.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Anomaly Detection</div><div class="model-link__cat">anomaly_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/semantic_segmentation" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_semantic.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Semantic Segmentation</div><div class="model-link__cat">semantic_segmentation</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/object_detection" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_object.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Object Detection</div><div class="model-link__cat">object_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRICING
+     ============================================================ -->
+<section id="pricing" class="pricing">
+  <div class="container section-pad">
+    <p class="section-label">Licensing &amp; Pricing / Services</p>
+    <h2 class="section-title">Product &amp; Service<br>Lineup</h2>
+    <p class="section-desc">Evaluate for free. License when you're ready to ship. No per-inference charges — ever. For AI acceleration and optimization, see AI Computing.</p>
+
+    <div class="pricing__grid">
+
+      <!-- Tier 01 -->
+      <div class="pricing-card">
+        <div class="pricing-card__top">
+          <span class="pricing-card__tier">TIER 01</span>
+        </div>
+        <h3 class="pricing-card__title">Evaluation</h3>
+        <p class="pricing-card__price">Free · No credit card required</p>
+        <hr class="pricing-card__divider">
+        <ul class="pricing-card__features">
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            Full SDK access for 30 days
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            All 400+ models included
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            All platforms included
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            Internal testing &amp; PoC only
+          </li>
+          <li class="unavailable">
+            <span class="pricing-card__dash">—</span>
+            Commercial distribution / production release
+          </li>
+          <li class="unavailable">
+            <span class="pricing-card__dash">—</span>
+            PoC delivery to third parties
+          </li>
+        </ul>
+        <div class="pricing-card__footer">
+          <a href="https://ailia.ai/trial/" class="btn btn--ghost btn--full">Download Evaluation SDK →</a>
+          <p class="pricing-card__note">&nbsp;</p>
+        </div>
+      </div>
+
+      <!-- Tier 02 -->
+      <div class="pricing-card pricing-card--featured">
+        <div class="pricing-card__top">
+          <span class="pricing-card__tier">TIER 02</span>
+        </div>
+        <h3 class="pricing-card__title">Commercial License</h3>
+        <p class="pricing-card__price">Annual subscription (per app), perpetual product licenses, and device-based licensing are all available.</p>
+        <hr class="pricing-card__divider">
+        <ul class="pricing-card__features">
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            Integration into production &amp; commercial apps
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            Redistribution rights to end users
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            Email &amp; meeting support
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            Dedicated team in Japanese &amp; English
+          </li>
+        </ul>
+        <div class="pricing-card__footer">
+          <a href="https://ailia.ai/contact/" class="btn btn--primary btn--full">Contact Sales →</a>
+          <p class="pricing-card__note">&nbsp;</p>
+        </div>
+      </div>
+
+      <!-- Service -->
+      <div class="pricing-card">
+        <div class="pricing-card__top">
+          <span class="pricing-card__tier">SERVICE</span>
+        </div>
+        <h3 class="pricing-card__title">AI Computing</h3>
+        <p class="pricing-card__price">Custom quote · Free consultation</p>
+        <hr class="pricing-card__divider">
+        <ul class="pricing-card__features">
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            Model quantization, optimization &amp; acceleration
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            Embedded environment (CPU/GPU constrained) support
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            End-to-end optimization including pre/post-processing
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            GPU parallel processing acceleration
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            SoC porting support
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            Expert engineers in both AI and embedded systems
+          </li>
+        </ul>
+        <div class="pricing-card__footer">
+          <a href="https://ailia.ai/ai-computing/" class="btn btn--ghost btn--full">Learn about AI Computing →</a>
+          <p class="pricing-card__note">For those who want to outsource<br>AI acceleration &amp; optimization.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRIAL / GET STARTED
+     ============================================================ -->
+<section id="trial" class="trial">
+  <div class="container section-pad">
+    <div class="trial__grid">
+
+      <!-- Left: Text & Buttons -->
+      <div class="trial__content">
+        <p class="section-label_2">Get Started</p>
+        <h2 class="trial__title">Try it free.<br><span class="em">Then let's talk.</span></h2>
+        <p class="trial__desc">The evaluation version is free for 30 days — no API key, no credit card required. Once you've confirmed it works, we'll recommend the right license for your use case.</p>
+        <div class="trial__actions">
+          <a href="https://ailia.ai/trial/" class="btn btn--primary">Download Free Trial →</a>
+          <a href="javascript:void(0)" onclick="openLangModal()" class="btn btn--ghost">Read the Docs
+           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+           <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+           </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Steps -->
+      <div class="steps">
+
+        <div class="step step--highlight">
+          <div class="step__left">
+            <span class="step__number">STEP 00</span>
+          </div>
+          <div class="step__body">
+            <h4 class="step__title">Try the App First (Optional)</h4>
+            <p class="step__desc">The ailia AI Showcase app lets you experience AI powered by ailia SDK — no installation needed. Includes object detection, pose estimation, super resolution, speech recognition, TTS, LLM, and more.</p>
+            <p class="step__desc"><a href="https://apps.apple.com/jp/app/ailia-ai-showcase/id1522828798" target="_blank" class="step__link">App Store</a> / <a href="https://play.google.com/store/apps/details?id=jp.axinc.ailia_ai_showcase" target="_blank" class="step__link">Google Play</a></p>
+          </div>
+        </div>
+
+        <div class="step__arrow" aria-hidden="true">
+          <img src="img/icon_arrow_down.svg" alt="">
+        </div>
+
+        <div class="step">
+          <div class="step__left">
+            <span class="step__number">STEP 01</span>
+          </div>
+          <div class="step__body">
+            <h4 class="step__title">Install via pip</h4>
+            <p class="step__desc">pip3 install ailia — the evaluation SDK is ready in seconds.</p>
+          </div>
+        </div>
+
+        <div class="step__arrow" aria-hidden="true">
+          <img src="img/icon_arrow_down.svg" alt="">
+        </div>
+
+        <div class="step">
+          <div class="step__left">
+            <span class="step__number">STEP 02</span>
+          </div>
+          <div class="step__body">
+            <h4 class="step__title">Clone ailia-models</h4>
+            <p class="step__desc">Get 400+ models and sample code. Run the model you need right away.</p>
+          </div>
+        </div>
+
+        <div class="step__arrow" aria-hidden="true">
+          <img src="img/icon_arrow_down.svg" alt="">
+        </div>
+
+        <div class="step">
+          <div class="step__left">
+            <span class="step__number">STEP 03</span>
+          </div>
+          <div class="step__body">
+            <h4 class="step__title">Run Your First Inference</h4>
+            <p class="step__desc">Object detection, pose estimation, speech recognition — all running offline.</p>
+          </div>
+        </div>
+
+        <div class="step__arrow" aria-hidden="true">
+          <img src="img/icon_arrow_down.svg" alt="">
+        </div>
+
+        <div class="step">
+          <div class="step__left">
+            <span class="step__number">STEP 04</span>
+          </div>
+          <div class="step__body">
+            <h4 class="step__title">Ready to Ship? Let's Talk Licensing</h4>
+            <p class="step__desc">Once you've validated it works, share your use case, device count, and app structure. We'll propose the best license — annual subscription, perpetual, or device-based. Consultation and estimates are always free.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+     Language Selection Modal
+     ============================================================ -->
+<div id="langModal" class="lang-modal" onclick="closeLangModal(event)">
+  <div class="lang-modal__box">
+    <button class="lang-modal__close" onclick="closeLangModal()">✕</button>
+    <p class="lang-modal__lead">Select your programming language to view the API docs.</p>
+    <div class="lang-modal__list">
+      <a href="https://github.com/axinc-ai/ailia-sdk/tree/main/python" target="_blank" class="lang-modal__item">
+        <img src="img/logo_python.svg" alt="Python" class="lang-modal__logo">
+        <span class="lang-modal__howto">How to use →</span>
+      </a>
+      <a href="https://github.com/axinc-ai/ailia-sdk/tree/main/unity" target="_blank" class="lang-modal__item">
+        <img src="img/logo_unity.svg" alt="Unity" class="lang-modal__logo">
+        <span class="lang-modal__howto">How to use →</span>
+      </a>
+      <a href="https://github.com/axinc-ai/ailia-sdk/tree/main/cpp" target="_blank" class="lang-modal__item">
+        <img src="img/logo_c++.svg" alt="C++" class="lang-modal__logo">
+        <span class="lang-modal__howto">How to use →</span>
+      </a>
+      <a href="https://github.com/axinc-ai/ailia-sdk/tree/main/java" target="_blank" class="lang-modal__item">
+        <img src="img/logo_java.svg" alt="Java" class="lang-modal__logo">
+        <span class="lang-modal__howto">How to use →</span>
+      </a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+        <footer>
+
+            <div class="cw">
+                <div class="wrap">
+                    <div class="left">
+                        <div class="col">
+                            <a href="/">ailia AI Series</a>
+                            <a href="/dx/">ailia DX Insight</a>
+                            <a href="/sdk/">ailia SDK</a>
+                            <a href="https://www.ailia.ai/voice">ailia AI VOICE</a>
+                            <a href="https://www.ailia.ai/speech">ailia AI SPEECH</a>
+                            <a href="/embedded/">ailia Embedded AI</a>
+                        </div>
+                        <div class="col">
+                            <a href="/ai-computing/">AI Computing</a>
+                            <a href="/ai-computing/ai-deeplearning-acceleration/">AI / Deep Learning Acceleration</a>
+                            <a href="/ai-computing/embedded-acceleration/">Embedded Acceleration</a>
+                            <a href="/ai-computing/image-processing-acceleration/">Image Processing Acceleration</a>
+                            <a href="/ai-computing/gpu-acceleration/">GPU Acceleration</a>
+                        </div>
+                        <div class="col">
+                            <a href="/ai-application/">AI Applications</a>
+                            <a href="https://blog.ailia.ai/pickup/ailia-ai-agent-01/">AI Agent</a>
+                        </div>
+                        <div class="col">
+                            <a href="/company/">Company</a>
+                            <a href="https://www.axell.co.jp/browser/">Terms of Use</a>
+                            <a href="https://www.axell.co.jp/privacy/">Privacy Policy</a>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <p class="company">ailia Inc.</p>
+                        <p class="address">Toso Kaikan 5F, 19-22 Uguisudanicho, Shibuya-ku, Tokyo 150-0032, Japan</p>
+                        <p class="btnWrap">
+                            <a class="btn btnContact" href="https://ailia.ai/contact/" target="_blank">
+                                <span class="icon"><img src="img/common/icon_contact.svg" alt=""></span>
+                                <span class="label">Contact Us</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bannerArea">
+                    <a href="https://blog.ailia.ai/" target="_blank">
+                        <img src="img/common/footer_banner_01.webp" alt="AI Media">
+                    </a>
+                    <a href="https://ailia.ai/sdk/" target="_blank">
+                        <img src="img/common/footer_banner_02.webp" alt="ailia SDK">
+                    </a>
+                </div>
+
+            </div>
+            <p class="copyright">Copyright &copy; ailia Inc. / Axell Corporation</p>
+        </footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

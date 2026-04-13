@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="color-scheme" content="light">
+ <title>ailia SDK — エッジAI推論フレームワーク</title>
+ <meta name="description" content="VulkanとMetalで動く。400モデルがすぐ使える。エッジAI推論SDK。">
+<!-- Open Graph protocol metadata start-->
+<meta property="og:site_name" content="ailia SDK ｜ailia AI Series" />
+<meta property="og:title" content="ailia SDK ｜ailia AI Series" />
+<meta property="og:description" content="VulkanとMetalで動く。400モデルがすぐ使える。エッジAI推論SDK。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ailia.ai/sdk/" />
+<meta property="og:image" content="https://ailia.ai/sdk/img/img_OGP.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+ <link rel="stylesheet" property="stylesheet" href="css/common.css" media="all">
+ <link rel="stylesheet" href="css/header.css">
+ <link rel="stylesheet" href="css/style.css">
+
+ <link rel="icon" type="image/png" href="img/favicon.png" sizes="16x16">
+ <link rel="apple-touch-icon" href="img/favicon.png" sizes="180x180">
+ <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="js/smoothScroll.js"></script>
+	<script type="text/javascript" src="js/top.js"></script>
+	<script type="text/javascript" src="js/spnavi.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/profmodal.js"></script>
+	<script type="text/javascript" src="js/move.js"></script>
+	<script type="text/javascript" src="js/mp_config.js"></script>
+	<script type="text/javascript" src="js/mp_fileio.js"></script>
+	<script type="text/javascript" src="js/mp_lib.js"></script>
+	<script type="text/javascript" src="js/chatwindow.js"></script>
+	<script type="text/javascript" src="js/jquery-modal-video.min.js"></script>
+    <script type="text/javascript" src="js/top_blog.js"></script>
+    <script type="text/javascript" src="js/ailia_dx_chat.js"></script>
+</head>
+<body>
+
+<!-- ============================================================
+     header
+     ============================================================ -->
+    <header id="header">
+        <nav>
+            <div class="navArea">
+                <div class="inner cw">
+                    <h1>
+                        <a class="navLogo" href="/"><img class="" src="img/common/logo.svg" alt="ailia">
+                            <span class="siteTitle">アイリア</span>
+                        </a>
+                    </h1>
+                    <ul class="navList">
+                        <li>
+                            <a href="/" class="">アイリアAIシリーズ</a>
+                        </li>
+                        <li>
+                            <a href="/ai-computing/" class="ai-computing">AIコンピューティング</a>
+                        </li>
+                        <li>
+                            <a href="/ai-application/" class="ai-application current">AIアプリケーション</a>
+                        </li>
+                        <li>
+                            <a href="/company/" class="company">会社情報</a>
+                        </li>
+                        <li class="lang">
+                            <a href="/ai-application/" class="current" lang="jp">JP</a>
+                            <a href="index_en.html" lang="en">EN</a>
+                        </li>
+                        <li class="contact">
+                            <a class="" href="https://ailia.ai/contact/" target="_blank">お問い合わせ</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="https://ailia.ai/contact/" target="_blank" class="spContact">お問い合わせ</a>
+                <a class="spNavBtn" href="javascript:void(0);"><span></span><span></span><span></span></a>
+            </div>
+        </nav>
+  </div>
+</header>
+<!-- subnv -->
+<div id="subNavArea">
+  <a href="#hero" class="subNavTitle">アイリアSDK</a>
+  <div class="site-menu-inner">
+    <nav class="site-menu">
+      <ul>
+        <li><a href="#cases">採用事例</a></li>
+        <li><a href="#comparison">ONNXとの比較</a></li>
+        <li><a href="#stack">ailia AIライブラリ</a></li>
+        <li><a href="#pricing">ライセンス・料金</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<!-- ============================================================
+     あいにゃん
+     ============================================================ -->
+        <div id="chatbtn">
+            <div class="chatbtnbox chatopen">
+                <div class="chatbtnwindow">ボク、あいにゃん。アイリアのことならなんでも聞いてくれにゃ。</div>
+                <div class="chara">
+                    <canvas id="avatar" width="256" height="256"></canvas>
+                    <img src="img/chara_sp.png" width="108" height="109" alt="あいにゃん" class="sp" />
+                </div>
+            </div>
+            <div class="btnclose chatclose">閉じる</div>
+            <div class="btnprof profopen">プロフィール</div>
+        </div>
+        <div id="chatwindow">
+            <div class="aichatinner">
+                <!-- チャット部分 -->
+                <div class="logarea">
+                    <div class="loghead">
+                        <div class="logtitle">あいにゃんチャットBOT（自動応答）</div>
+                        <div id="chatclose" class="winclose">閉じる</div>
+                    </div>
+                    <div class="logbody" id="logbody">
+                        <div class="logtext">
+                            <div id="chat"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chatarea">
+                    <div class="chatbody">
+                        <form name="chat_form"
+                            action="javascript:chat_api('https://ailia-llm-insight.uw.r.appspot.com/');">
+                            <div class="chatformbox">
+                                <input type="text" name="prompt" id="prompt" size="40"
+                                    placeholder="※ここに質問を入力（例：アイリアについて）">
+                            </div>
+                            <div class="chatbutton">
+                                <button type="button"
+                                    onclick="chat_api('https://ailia-llm-insight.uw.r.appspot.com/')">送信</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- CHARAPROF -->
+        <!--<div id="profmodal">
+            <div class="profbg"></div>
+            <div class="profwindow">
+                <div class="profinner">
+                    <div class="profclose">閉じる</div>
+                    <div class="pic"><img src="img/chara_detail_pic.png" width="447" height="574" alt="" /></div>
+                    <div class="textarea">
+                        <div class="label">アイリアブランド公式キャラクター</div>
+                        <div class="name">あいにゃん</div>
+                        <div class="text">
+                            未来の世界からやってきた、AIにくわしい謎の生物。「◯◯だにゃ」としゃべるが、ねこではないらしい。アイリアブランドの製品やサービスに関する情報を教えてくれる。 【好きな食べ物】
+                            キャットフード</div> 
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    <!--============================================================
+     HERO
+     ============================================================ -->
+<section id="hero" class="hero">
+  <!-- 背景画像 -->
+  <div class="hero__bg" aria-hidden="true">
+    <img src="img/img_mv.png" alt="" class="hero__bg-img">
+  </div>
+  <div class="container">
+    <div class="hero__inner">
+     <!-- <p class="hero__tag">エッジAI推論SDK</p>-->
+      <h1 class="hero__title">
+       <span class="em">アイリアSDK</span><br>
+        VulkanとMetalで動く。<br>
+        400モデルがすぐ使える。<br>
+        エッジAI推論SDK。
+      </h1>
+      <p class="hero__lead">組み込み・モバイル・ゲームなど、Python以外の環境でAIを動かしたい開発者向けの推論SDKです。Unity・Kotlin・C++から使える音声・LLM・トラッキングライブラリも揃っており、エッジAIアプリケーションを一気通貫で開発できます。</p>
+      <div class="hero__actions">
+        <a href="#pricing" class="btn btn--primary">無料トライアル<svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+  </svg></a>
+        <a href="#stack" class="btn btn--ghost">ライブラリ一覧<svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+  </svg></a>
+  <p class="hero__meta">
+        400以上の事前学習モデル収録<br>
+        Windows / macOS / Linux / iOS / Android / Jetson / Raspberry Pi
+      </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SHOWCASE / デモアプリ
+     ============================================================ -->
+<section id="showcase" class="showcase">
+  <div class="container section-pad">
+    <h2 class="showcase__heading">まずは動かして体験しよう</h2>
+    <div class="showcase__card">
+      <div class="showcase__left">
+        <h3 class="showcase__title">アイリアのデモアプリ</h3>
+        <p class="showcase__desc">物体検出・姿勢推定・超解像・音声認識・音声合成・LLMなど、アイリアSDKが動かすAIをアプリで今すぐ体験できます。</p>
+        <div class="showcase__btns">
+          <a href="https://apps.apple.com/jp/app/ailia-ai-showcase/id1522828798" target="_blank" class="showcase__store-btn">
+            <img src="img/badge_appstore.svg" alt="App Storeからダウンロード">
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=jp.axinc.ailia_ai_showcase" target="_blank" class="showcase__store-btn">
+            <img src="img/badge_googleplay.svg" alt="Google Playで手に入れよう">
+          </a>
+        </div>
+      </div>
+      <div class="showcase__right">
+        <img src="img/img_showcase.png" alt="ailia AI Showcase アプリのスクリーンショット" class="showcase__screen">
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================================================
+     PAIN vs SOLUTION
+     ============================================================ -->
+<section id="pain" class="pain">
+  <div class="container section-pad">
+    <div class="pain__grid">
+
+      <!-- 課題カラム -->
+      <div class="pain__col">
+        <div class="pain__col-header pain__col-header--problem">
+          エッジAI開発の現実的な課題
+        </div>
+        <ul class="pain__list">
+          <li class="pain__item">
+            <img src="img/icon_cross.svg" alt="" class="pain__icon">
+            <span>工場・車載・現場など、通信が使えない環境でAIを動かす必要がある</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_cross.svg" alt="" class="pain__icon">
+            <span>クラウドAPIは推論ごとに費用が発生し、スケールすると費用が膨大になる</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_cross.svg" alt="" class="pain__icon">
+            <span>画像・音声・文書などの機密データを社外に送信できない</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_cross.svg" alt="" class="pain__icon">
+            <span>UnityやKotlinからPythonのAIライブラリ（Transformers等）が使えない</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 中央の矢印 -->
+      <div class="pain__arrow" aria-hidden="true">
+        <img src="img/pain__arrow.svg">
+      </div>
+
+      <!-- 解決カラム -->
+      <div class="pain__col">
+        <div class="pain__col-header pain__col-header--solution">
+          アイリアSDKによる解決
+        </div>
+        <ul class="pain__list">
+          <li class="pain__item">
+            <img src="img/icon_check.svg" alt="" class="pain__icon">
+            <span>完全オフライン推論。ネットワーク不要でデバイス上で完結する</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_check.svg" alt="" class="pain__icon">
+            <span>ライセンス費用のみ。推論回数・ユーザー数による追加課金なし</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_check.svg" alt="" class="pain__icon">
+            <span>全処理がデバイス内で完結。データが外部に出ない</span>
+          </li>
+          <li class="pain__item">
+            <img src="img/icon_check.svg" alt="" class="pain__icon">
+            <span>ailia Tokenizer / Speech / LLM / TrackerがUnity・Kotlin・C++に対応</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CASES (ACCORDION)
+     ============================================================ -->
+<section id="cases" class="cases">
+  <div class="container">
+    <p class="cases__label">採用事例（一部）</p>
+    <div class="cases__list">
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">マンガ・イラスト制作</span>
+          <span class="accordion__title">CLIP STUDIO PAINT × アイリアSDK</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">スマートスムージング機能のAI推論にアイリアSDKを採用。クロスプラットフォームでGPUを使用した高速推論基盤を提供。</p>
+          <a href="https://www.axell.co.jp/business/case/detail_02.html" target="_blank" class="accordion__link">詳細を見る →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">マンガ・イラスト（Android）</span>
+          <span class="accordion__title">CLIP STUDIO PAINT for Galaxy × アイリアSDK</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">AndroidのVulkanを用いた独自実装の高速推論により、Galaxy端末でのスマートスムージング機能を実現。</p>
+          <a href="https://www.axell.co.jp/business/case/detail_01.html" target="_blank" class="accordion__link">詳細を見る →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">自動車・ADAS</span>
+          <span class="accordion__title">次世代車載機器PoC × AIソリューション</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">ハンドル内蔵カメラからクラウド接続なしでドライバー状態をリアルタイム検知。顔・視線・姿勢の複数AIモデルを同時実行。</p>
+          <a href="https://www.axell.co.jp/business/case/detail_04.html" target="_blank" class="accordion__link">詳細を見る →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">自動運転・モビリティ</span>
+          <span class="accordion__title">パートナーモビリティ × アイリアSDK</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">NTTドコモ推進の自律走行車いすに採用。障害物検知・プライバシー保護処理をエッジ上でリアルタイム実行。</p>
+          <a href="https://www.axell.co.jp/business/case/detail_08.html" target="_blank" class="accordion__link">詳細を見る →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">スポーツ・体験施設</span>
+          <span class="accordion__title">JFA blue-ing! × アイリアSDK</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">東京ドームシティのサッカー体験施設にAI実装。FaceSwap・動画生成・LLM対話システムをaアイリアSDKで統一し長期運用を実現。</p>
+          <a href="https://ailia.ai/case/blueing/" target="_blank" class="accordion__link">詳細を見る →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">デジタルアセット管理</span>
+          <span class="accordion__title">CIERTO × ailia SDK（VPJ）</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">DAMシステム「CIERTO」にAIを搭載。メタデータ自動入力・類似画像検索などの機能をアイリアSDKで実現。</p>
+          <a href="https://www.vpj.co.jp/news/pressrelease/detail.html?pid=253" target="_blank" class="accordion__link">詳細を見る →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">組み込み・半導体</span>
+          <span class="accordion__title">NSITEXE DR1000C × アイリアSDK</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">デンソー発のRISC-VプロセッサDR1000Cにailia TFLite Runtimeを実装。Non-OS・RTOS環境でのAI推論を実現。</p>
+          <a href="https://prtimes.jp/main/html/rd/p/000000044.000004053.html" target="_blank" class="accordion__link">詳細を見る →</a>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" onclick="toggleAccordion(this)">
+          <span class="accordion__tag">アート・体験型パビリオン</span>
+          <span class="accordion__title">EXPO 2025 大阪・関西万博 null²（落合陽一）</span>
+          <span class="accordion__indicator">＋</span>
+        </button>
+        <div class="accordion__body">
+          <p class="accordion__body-desc">音声認識・音声合成・低遅延エッジAI・生成AIをアイリアSDKで実装。来場者数十万人規模のインタラクティブ体験施設を支えた。</p>
+          <a href="https://blog.ailia.ai/dialogue/expo-2025_ochiaiyoichi/" target="_blank" class="accordion__link">詳細を見る →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMPARISON TABLE
+     ============================================================ -->
+<section id="comparison" class="comparison">
+  <div class="container section-pad">
+    <p class="section-label">ONNX Runtimeとの比較</p>
+    <h2 class="section-title">汎用ランタイムではなく、<br>特定用途で超えられる理由</h2>
+    <p class="section-desc">ライブラリをすべて内製しているため、特定デバイス・特定モデルに特化した最適化が可能です。Vulkan・Metal直接実装やモデル特化チューニングなど、汎用設計では対応しにくい領域をカバーします。</p>
+    <div class="comparison__table-wrap">
+      <table class="comparison__table">
+        <thead>
+          <tr>
+            <th class="col-feature"></th>
+            <th class="col-ailia">アイリアSDK</th>
+            <th class="col-ort">ONNX Runtime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">Vulkan・Metal独自実装によるGPU推論</div>
+              <div class="comparison__feature-desc">Android/Windows/Linux（Vulkan）、iOS/macOS（Metal直接実装）</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--no"><img src="img/icon_cross2.svg" alt="✗" class="comparison__icon"></td>
+          </tr>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">音声認識・音声合成・LLM・トークナイザー・物体追跡ライブラリ</div>
+              <div class="comparison__feature-desc">ailia Speech / Voice / LLM / Tokenizer / Tracker — Unity・Flutter・C++対応</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--no"><img src="img/icon_cross2.svg" alt="✗" class="comparison__icon"></td>
+          </tr>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">400以上の公式モデルライブラリ</div>
+              <div class="comparison__feature-desc">動作検証済みモデルとサンプルコードをすぐに利用可能</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--no"><img src="img/icon_cross2.svg" alt="✗" class="comparison__icon"></td>
+          </tr>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">Non-OS / RTOS対応</div>
+              <div class="comparison__feature-desc">内製ライブラリによる任意OSへの対応</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--no"><img src="img/icon_cross2.svg" alt="✗" class="comparison__icon"></td>
+          </tr>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">Unity公式バインディング＋モデル集</div>
+              <div class="comparison__feature-desc">ゲーム・XR向けにモデルを選んで即デプロイ</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--part"><img src="img/icon_trigone.svg" alt="△" class="comparison__icon"></td>
+          </tr>
+          <tr>
+            <td class="comparison__feature">
+              <div class="comparison__feature-name">モデル特化最適化</div>
+              <div class="comparison__feature-desc">内製ライブラリによる特定モデル・デバイスへの最適化</div>
+            </td>
+            <td class="comparison__cell comparison__cell--yes"><img src="img/icon_check2.svg" alt="○" class="comparison__icon"></td>
+            <td class="comparison__cell comparison__cell--part"><img src="img/icon_trigone.svg" alt="△" class="comparison__icon"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="comparison__footnote">△ = 対応しているが汎用実装のため最適化に限界あり　※ 当社調査による</p>
+    <p class="comparison__note">Python以外の環境（Unity・Kotlin・C++）でも、LLMのトークナイズから物体追跡まで完結するライブラリ群を公式提供しています。</p>
+    <div class="comparison__links">
+      <a href="https://github.com/axinc-ai/ailia-models" target="_blank" class="btn btn--ghost">アイリア MODELS(Python) →</a>
+      <a href="https://github.com/axinc-ai/ailia-models-unity" target="_blank" class="btn btn--ghost">アイリア MODELS Unity →</a>
+      <a href="https://github.com/ailia-ai/ailia-models-kotlin" target="_blank" class="btn btn--ghost">アイリア MODELS Kotlin →</a>
+    </div>
+  </div>
+</section>
+<!-- ============================================================
+     AI LIBRARY STACK
+     ============================================================ -->
+<section id="stack" class="stack">
+  <div class="container section-pad">
+    <p class="section-label">アイリア AIライブラリスイート</p>
+    <h2 class="section-title">完全オフラインのAIアプリを<br>一気通貫で構築できる</h2>
+    <p class="section-desc">アイリアSDKは推論エンジン。音声認識・音声合成・LLMの専用ライブラリと組み合わせれば、クラウド依存ゼロのAIプロダクトが完成します。</p>
+
+    <!-- コアSDKバナー -->
+    <div class="stack__core-banner">
+      <div class="stack__core-badge">
+        <span>CORE</span>
+        <span>SDK</span>
+      </div>
+      <div class="stack__core-body">
+        <h3 class="stack__core-title">アイリアSDK</h3>
+        <p class="stack__core-desc">クロスプラットフォーム・GPU加速・400以上のモデル・ONNX / TFLite</p>
+      </div>
+    </div>
+
+    <!-- ライブラリカード3列 -->
+    <div class="stack__libs">
+
+      <div class="lib-card lib-card--speech">
+        <div class="lib-card__header">
+          <h4 class="lib-card__name">アイリア AI Speech</h4>
+          <span class="lib-card__tag">音声認識ライブラリ</span>
+        </div>
+        <p class="lib-card__desc">OpenAI Whisperベースのオフライン音声認識。99言語対応。Unity・C++・Flutter対応。</p>
+        <div class="lib-card__img">
+          <img src="img/img_aispeech.svg" alt="ailia AI Speech">
+        </div>
+        <a href="https://www.ailia.ai/speech" target="_blank" class="lib-card__link">詳しく見る →</a>
+      </div>
+
+      <div class="lib-card lib-card--voice">
+        <div class="lib-card__header">
+          <h4 class="lib-card__name">アイリア AI Voice</h4>
+          <span class="lib-card__tag">音声合成ライブラリ</span>
+        </div>
+        <p class="lib-card__desc">GPT-SoVITSベースのオフラインTTS。10秒の音声サンプルで声をクローニング。Unity・Flutter対応。</p>
+        <div class="lib-card__img">
+          <img src="img/img_aivoice.svg" alt="ailia AI Voice">
+        </div>
+        <a href="https://www.ailia.ai/voice" target="_blank" class="lib-card__link">詳しく見る →</a>
+      </div>
+
+      <div class="lib-card lib-card--llm">
+        <div class="lib-card__header">
+          <h4 class="lib-card__name">アイリア LLM</h4>
+          <span class="lib-card__tag">ローカルLLMライブラリ</span>
+        </div>
+        <p class="lib-card__desc">GGUFフォーマットのLLMをデバイス上で動かす。Llama 3・Gemma 2・Qwen対応。C++・Unity・Flutter対応。</p>
+        <div class="lib-card__img">
+          <img src="img/img_llm.svg" alt="ailia LLM">
+        </div>
+        <a href="https://www.ailia.ai/llm" class="lib-card__link">詳しく見る →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     USE CASES (TABS)
+     ============================================================ -->
+<section id="usecases" class="usecases">
+  <div class="container section-pad">
+    <p class="section-label">業種別活用事例</p>
+    <h2 class="section-title">何を作りますか？</h2>
+    <p class="section-desc">業種を選んで、アイリアSDKがどのように課題を解決するかをご覧ください。</p>
+
+    <div class="usecases__wrap">
+      <!-- タブ -->
+      <div class="usecases__tabs">
+        <button class="usecases__tab usecases__tab--active" onclick="switchTab(0)">製造・品質検査</button>
+        <button class="usecases__tab" onclick="switchTab(1)">自動車・ADAS</button>
+        <button class="usecases__tab" onclick="switchTab(2)">監視カメラ</button>
+        <button class="usecases__tab" onclick="switchTab(3)">ゲーム・メディア</button>
+        <button class="usecases__tab" onclick="switchTab(4)">医療・ヘルスケア</button>
+      </div>
+
+      <!-- パネル -->
+      <div class="usecases__panels">
+
+        <div class="usecases__panel usecases__panel--active">
+          <div class="usecase__info">
+            <p class="usecase__industry">製造業 · 品質検査</p>
+            <h3 class="usecase__title">製造ラインの欠陥検知をクラウドなしで実現</h3>
+            <p class="usecase__desc">カメラに取り付けた組み込みボード上で異常検知モデルを直接実行。ネットワーク不要で工場内のデータが外部に出ません。</p>
+            <div class="usecase__chips">
+              <span class="usecase__chip">PaDiM</span>
+              <span class="usecase__chip">異常検知モデル</span>
+              <span class="usecase__chip">YOLOv9</span>
+            </div>
+          </div>
+          <hr class="usecase__divider">
+          <div class="usecase__models">
+            <p class="usecase__models-label">使用モデル — アイリアMODELS</p>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/anomaly_detection/padim" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_search.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">PaDiM</div><div class="model-link__cat">anomaly_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/anomaly_detection/patchcore" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_search.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">PatchCore</div><div class="model-link__cat">anomaly_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/object_detection/yolov9" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_object.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">YOLOv9</div><div class="model-link__cat">object_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+          </div>
+        </div>
+
+        <div class="usecases__panel">
+          <div class="usecase__info">
+            <p class="usecase__industry">自動車 · ADAS・ドライバーモニタリング</p>
+            <h3 class="usecase__title">居眠り・脇見検知をOEM SoCで動かす</h3>
+            <p class="usecase__desc">MediaPipeベースのモデルで眼球・頭部姿勢をリアルタイム解析。Qualcomm・NXP・TI SoCに対応し、車載機器に直接組み込めます。</p>
+            <div class="usecase__chips">
+              <span class="usecase__chip">MediaPipe Iris</span>
+              <span class="usecase__chip">姿勢推定</span>
+              <span class="usecase__chip">顔検出</span>
+              <span class="usecase__chip">アイリアVoice（警告音声）</span>
+            </div>
+          </div>
+          <hr class="usecase__divider">
+          <div class="usecase__models">
+            <p class="usecase__models-label">使用モデル — アイリアMODELS</p>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/eye_tracking/mediapipe_iris" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_eyetracking.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">MediaPipe Iris</div><div class="model-link__cat">eye_tracking</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/face_detection" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_facedetection.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Face Detection</div><div class="model-link__cat">face_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/pose_estimation" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_pose.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Pose Estimation</div><div class="model-link__cat">pose_estimation</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+          </div>
+        </div>
+
+        <div class="usecases__panel">
+          <div class="usecase__info">
+            <p class="usecase__industry">セキュリティ · 監視カメラ</p>
+            <h3 class="usecase__title">エッジ処理でサーバーコストとプライバシーリスクを削減</h3>
+            <p class="usecase__desc">人物検出・人流カウントをカメラデバイス上で完結。映像データをアップロードせず、イベントメタデータのみ送信するアーキテクチャを実現できます。</p>
+            <div class="usecase__chips">
+              <span class="usecase__chip">人物検出</span>
+              <span class="usecase__chip">人流カウント</span>
+              <span class="usecase__chip">NSFW Detector</span>
+            </div>
+          </div>
+          <hr class="usecase__divider">
+          <div class="usecase__models">
+            <p class="usecase__models-label">使用モデル — アイリアMODELS</p>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/object_detection" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_object.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Object Detection</div><div class="model-link__cat">object_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/crowd_counting" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_crowd.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Crowd Counting</div><div class="model-link__cat">crowd_counting</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/image_classification/clip_nsfw" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_clip.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">CLIP-based NSFW Detector</div><div class="model-link__cat">image_classification</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+          </div>
+        </div>
+
+        <div class="usecases__panel">
+          <div class="usecase__info">
+            <p class="usecase__industry">ゲーム・メディア · インタラクティブAI</p>
+            <h3 class="usecase__title">ゲームビルドに同梱できるリアルタイムAIキャラクター</h3>
+            <p class="usecase__desc">アイリアSDKはCLIP STUDIO PAINTやSEGAに採用実績あり。アイリアLLM + アイリア AI Voiceで会話するNPCを完全オフラインで実現します。</p>
+            <div class="usecase__chips">
+              <span class="usecase__chip">アイリアLLM（対話生成）</span>
+              <span class="usecase__chip">アイリア AI Voice（TTS）</span>
+              <span class="usecase__chip">姿勢推定</span>
+              <span class="usecase__chip">超解像</span>
+            </div>
+          </div>
+          <hr class="usecase__divider">
+          <div class="usecase__models">
+            <p class="usecase__models-label">使用モデル — アイリアMODELS</p>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/pose_estimation" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_pose.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Pose Estimation</div><div class="model-link__cat">pose_estimation</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/super_resolution" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_resolution.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Super Resolution</div><div class="model-link__cat">super_resolution</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/background_removal" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_bgremoval.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Background Removal</div><div class="model-link__cat">background_removal</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+          </div>
+        </div>
+
+        <div class="usecases__panel">
+          <div class="usecase__info">
+            <p class="usecase__industry">医療・ヘルスケア · 規制対応機器</p>
+            <h3 class="usecase__title">暗号化モデルで患者データを守るAI診断支援</h3>
+            <p class="usecase__desc">モデル暗号化で診断AIの知的財産を保護。完全オフライン推論により患者データがデバイス外に出ず、プライバシー保護・データ所在地要件への対応を設計段階から組み込めます。</p>
+            <div class="usecase__chips">
+              <span class="usecase__chip">医療画像セグメンテーション</span>
+              <span class="usecase__chip">異常検知</span>
+              <span class="usecase__chip">アイリア AI Speech（音声メモ）</span>
+              <span class="usecase__chip">モデル暗号化</span>
+            </div>
+          </div>
+          <hr class="usecase__divider">
+          <div class="usecase__models">
+            <p class="usecase__models-label">使用モデル — アイリアMODELS</p>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/anomaly_detection" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_search.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Anomaly Detection</div><div class="model-link__cat">anomaly_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/semantic_segmentation" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_semantic.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Semantic Segmentation</div><div class="model-link__cat">semantic_segmentation</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+            <a href="https://github.com/axinc-ai/ailia-models/tree/master/object_detection" target="_blank" class="model-link">
+              <div class="model-link__left">
+                <img src="img/icon_object.svg" alt="" class="model-link__icon">
+                <div><div class="model-link__name">Object Detection</div><div class="model-link__cat">object_detection</div></div>
+              </div>
+              <img src="img/icon_arrow.svg" alt="" class="model-link__arrow">
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================================================
+     PRICING
+     ============================================================ -->
+<section id="pricing" class="pricing">
+  <div class="container section-pad">
+    <p class="section-label">ライセンス・料金 / サービス</p>
+    <h2 class="section-title">プロダクトとサービスの<br>ラインナップ</h2>
+    <p class="section-desc">まず無料で評価。本番導入が決まってからライセンス契約。推論回数による追加課金は一切ありません。AIの高速化・最適化を委託したい場合はAIコンピューティングをご利用ください。</p>
+
+    <div class="pricing__grid">
+
+      <!-- Tier 01 -->
+      <div class="pricing-card">
+        <div class="pricing-card__top">
+          <span class="pricing-card__tier">TIER 01</span>
+        </div>
+        <h3 class="pricing-card__title">評価版</h3>
+        <p class="pricing-card__price">無料・クレジットカード不要</p>
+        <hr class="pricing-card__divider">
+        <ul class="pricing-card__features">
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            SDK全機能を30日間利用可能
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            400以上のモデルすべてに対応
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            全プラットフォームを含む
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            社内テスト・PoC専用
+          </li>
+          <li class="unavailable">
+            <span class="pricing-card__dash">—</span>
+            商用配布・本番リリース
+          </li>
+          <li class="unavailable">
+            <span class="pricing-card__dash">—</span>
+            第三者へのPoC提供
+          </li>
+        </ul>
+        <div class="pricing-card__footer">
+          <a href="https://ailia.ai/trial/" class="btn btn--ghost btn--full">評価版SDKをダウンロード　→</a>
+          <p class="pricing-card__note">&nbsp;</p>
+        </div>
+      </div>
+
+      <!-- Tier 02 -->
+      <div class="pricing-card pricing-card--featured">
+        <div class="pricing-card__top">
+          <span class="pricing-card__tier">TIER 02</span>
+        </div>
+        <h3 class="pricing-card__title">商用ライセンス</h3>
+        <p class="pricing-card__price">年間サブスクリプション（アプリ単位）のほか、製品縛りの買い切りライセンス、台数ベースのライセンスも提供しています。</p>
+        <hr class="pricing-card__divider">
+        <ul class="pricing-card__features">
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            本番環境・商用アプリへの組み込み
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            エンドユーザーへの再配布権
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            メール・ミーティングサポート
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            日本語・英語の担当チーム対応
+          </li>
+        </ul>
+        <div class="pricing-card__footer">
+          <a href="https://ailia.ai/contact/" class="btn btn--primary btn--full">セールスに問い合わせる　→</a>
+          <p class="pricing-card__note">&nbsp;</p>
+        </div>
+      </div>
+
+      <!-- サービス -->
+      <div class="pricing-card">
+        <div class="pricing-card__top">
+          <span class="pricing-card__tier">サービス</span>
+        </div>
+        <h3 class="pricing-card__title">AIコンピューティング</h3>
+        <p class="pricing-card__price">カスタム見積もり・相談無料</p>
+        <hr class="pricing-card__divider">
+        <ul class="pricing-card__features">
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            AIモデルの量子化・最適化・高速化
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            組込み環境（CPU/GPU制約）への対応
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            画像処理前後処理を含む全体最適化
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            GPU並列処理による高速化
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            SoCへのポーティング支援
+          </li>
+          <li>
+            <img src="img/icon_check.svg" alt="" class="pricing-card__icon">
+            AI・組込み両面の専門エンジニア対応
+          </li>
+        </ul>
+        <div class="pricing-card__footer">
+          <a href="https://ailia.ai/ai-computing/" class="btn btn--ghost btn--full">AIコンピューティングを見る　→</a>
+          <p class="pricing-card__note">SDKで自社開発せずに、<br>推論の高速化・最適化を委託されたい場合。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRIAL / GET STARTED
+     ============================================================ -->
+<section id="trial" class="trial">
+  <div class="container section-pad">
+    <div class="trial__grid">
+
+      <!-- 左：テキスト＆ボタン -->
+      <div class="trial__content">
+        <p class="section-label_2">はじめる</p>
+        <h2 class="trial__title">まず無料で試して、<br><span class="em">動いたら相談。</span></h2>
+        <p class="trial__desc">評価版は30日間無料。APIキーもクレジットカードも不要です。動作確認できたら、用途に合わせたライセンスをご提案します。</p>
+        <div class="trial__actions">
+          <a href="https://ailia.ai/trial/" class="btn btn--primary">無料トライアルをダウンロード　→</a>
+          <a href="javascript:void(0)" onclick="openLangModal()" class="btn btn--ghost">ドキュメントを読む
+           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+           <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+           </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- 右：ステップ -->
+      <div class="steps">
+
+        <div class="step step--highlight">
+          <div class="step__left">
+            <span class="step__number">STEP 00</span>
+          </div>
+          <div class="step__body">
+            <h4 class="step__title">アプリで動作を確認する（任意）</h4>
+            <p class="step__desc">Ailia AI Showcaseアプリを使えば、インストール不要でailia SDKが動かすAIを体験できます。物体検出・姿勢推定・超解像・音声認識・音声合成・LLMなど多数収録。</p>
+            <p class="step__desc"><a href="https://apps.apple.com/jp/app/ailia-ai-showcase/id1522828798" target="_blank" class="step__link">App Store</a> / <a href="https://play.google.com/store/apps/details?id=jp.axinc.ailia_ai_showcase" target="_blank" class="step__link">Google Play</a></p>
+          </div>
+        </div>
+
+        <div class="step__arrow" aria-hidden="true">
+          <img src="img/icon_arrow_down.svg" alt="">
+        </div>
+
+        <div class="step">
+          <div class="step__left">
+            <span class="step__number">STEP 01</span>
+          </div>
+          <div class="step__body">
+            <h4 class="step__title">pipでインストール</h4>
+            <p class="step__desc">pip3 install ailia — 評価版SDKが数秒でインストール完了。</p>
+          </div>
+        </div>
+
+        <div class="step__arrow" aria-hidden="true">
+          <img src="img/icon_arrow_down.svg" alt="">
+        </div>
+
+        <div class="step">
+          <div class="step__left">
+            <span class="step__number">STEP 02</span>
+          </div>
+          <div class="step__body">
+            <h4 class="step__title">ailia-modelsをclone</h4>
+            <p class="step__desc">400以上のモデルとサンプルコードを取得。使いたいモデルをすぐ実行できます。</p>
+          </div>
+        </div>
+
+        <div class="step__arrow" aria-hidden="true">
+          <img src="img/icon_arrow_down.svg" alt="">
+        </div>
+
+        <div class="step">
+          <div class="step__left">
+            <span class="step__number">STEP 03</span>
+          </div>
+          <div class="step__body">
+            <h4 class="step__title">最初の推論を実行</h4>
+            <p class="step__desc">物体検出・姿勢推定・音声認識などがオフラインで動作します。</p>
+          </div>
+        </div>
+
+        <div class="step__arrow" aria-hidden="true">
+          <img src="img/icon_arrow_down.svg" alt="">
+        </div>
+
+        <div class="step">
+          <div class="step__left">
+            <span class="step__number">STEP 04</span>
+          </div>
+          <div class="step__body">
+            <h4 class="step__title">商用化が決まったらライセンス相談</h4>
+            <p class="step__desc">評価版で動作確認できたら、用途・デバイス数・アプリ構成をお知らせください。年間サブスクリプション・買い切り・台数ベースの中から最適なライセンスをご提案します。相談・見積もりは無料です。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================
+     言語選択モーダル
+     ============================================================ -->
+<div id="langModal" class="lang-modal" onclick="closeLangModal(event)">
+  <div class="lang-modal__box">
+    <button class="lang-modal__close" onclick="closeLangModal()">✕</button>
+    <p class="lang-modal__lead">使用するプログラム言語からAPIを確認できます。</p>
+    <div class="lang-modal__list">
+      <a href="https://github.com/axinc-ai/ailia-sdk/tree/main/python" target="_blank" class="lang-modal__item">
+        <img src="img/logo_python.svg" alt="Python" class="lang-modal__logo">
+        <span class="lang-modal__howto">How to use →</span>
+      </a>
+      <a href="https://github.com/axinc-ai/ailia-sdk/tree/main/unity" target="_blank" class="lang-modal__item">
+        <img src="img/logo_unity.svg" alt="Unity" class="lang-modal__logo">
+        <span class="lang-modal__howto">How to use →</span>
+      </a>
+      <a href="https://github.com/axinc-ai/ailia-sdk/tree/main/cpp" target="_blank" class="lang-modal__item">
+        <img src="img/logo_c++.svg" alt="C++" class="lang-modal__logo">
+        <span class="lang-modal__howto">How to use →</span>
+      </a>
+      <a href="https://github.com/axinc-ai/ailia-sdk/tree/main/java" target="_blank" class="lang-modal__item">
+        <img src="img/logo_java.svg" alt="Java" class="lang-modal__logo">
+        <span class="lang-modal__howto">How to use →</span>
+      </a>
+    </div>
+  </div>
+</div>
+</section>
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+        <footer>
+
+            <div class="cw">
+                <div class="wrap">
+                    <div class="left">
+                        <div class="col">
+                            <a href="/">アイリアAIシリーズ</a>
+                            <a href="/dx/">アイリア DX Insight</a>
+                            <a href="/sdk/">アイリア SDK</a>
+                            <a href="https://www.ailia.ai/voice">アイリア AI VOICE</a>
+                            <a href="https://www.ailia.ai/speech">アイリア AI SPEECH</a>
+                            <a href="/embedded/">アイリア Embedded AI</a>
+                        </div>
+                        <div class="col">
+                            <a href="/ai-computing/">AIコンピューティング</a>
+                            <a href="/ai-computing/ai-deeplearning-acceleration/">AI・深層学習向け高速化</a>
+                            <a href="/ai-computing/embedded-acceleration/">組込み高速化</a>
+                            <a href="/ai-computing/image-processing-acceleration/">画像処理高速化</a>
+                            <a href="/ai-computing/gpu-acceleration/">GPU向け高速化</a>
+                        </div>
+                        <div class="col">
+                            <a href="/ai-application/">AIアプリケーション</a>
+                            <a href="https://blog.ailia.ai/pickup/ailia-ai-agent-01/">AIエージェント</a>
+                        </div>
+                        <div class="col">
+                            <a href="/company/">会社情報</a>
+                            <a href="https://www.axell.co.jp/browser/">利用規約</a>
+                            <a href="https://www.axell.co.jp/privacy/">プライバシーポリシー</a>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <p class="company">アイリア株式会社</p>
+                        <p class="address">〒150-0032　東京都渋谷区鶯谷町19-22　塗装会館5F</p>
+                        <p class="btnWrap">
+                            <a class="btn btnContact" href="https://ailia.ai/contact/" target="_blank">
+                                <span class="icon"><img src="img/common/icon_contact.svg" alt=""></span>
+                                <span class="label">お問い合わせ</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bannerArea">
+                    <a href="https://blog.ailia.ai/" target="_blank">
+                        <img src="img/common/footer_banner_01.webp" alt="AIでしごとするなら「AI専門メディア」">
+                    </a>
+                    <a href="https://ailia.ai/sdk/" target="_blank">
+                        <img src="img/common/footer_banner_02.webp" alt="ソフトウェア開発きっとアイリアSDK">
+                    </a>
+
+                </div>
+
+            </div>
+            <p class="copyright">Copyright &copy; アイリア株式会社 / 株式会社アクセル</p>
+        </footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

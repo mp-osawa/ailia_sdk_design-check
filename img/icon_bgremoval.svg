@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="長方形_277" data-name="長方形 277" width="48" height="39.529" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="icon_bgremoval" transform="translate(9.816 2.006)">
+    <rect id="長方形_257" data-name="長方形 257" width="48" height="48" transform="translate(-9.816 -2.006)" fill="none"/>
+    <g id="グループ_249" data-name="グループ 249" transform="translate(-9.816 1.921)">
+      <rect id="長方形_265" data-name="長方形 265" width="11.036" height="11.036" transform="translate(1.928 3.764)" fill="#b0b0b0" opacity="0.498"/>
+      <rect id="長方形_267" data-name="長方形 267" width="11.036" height="11.036" transform="translate(24 3.764)" fill="#b0b0b0" opacity="0.498"/>
+      <rect id="長方形_270" data-name="長方形 270" width="11.036" height="11.036" transform="translate(12.964 14.8)" fill="#b0b0b0" opacity="0.498"/>
+      <rect id="長方形_272" data-name="長方形 272" width="11.036" height="11.036" transform="translate(35.036 14.8)" fill="#b0b0b0" opacity="0.498"/>
+      <rect id="長方形_273" data-name="長方形 273" width="11.036" height="11.036" transform="translate(1.928 25.837)" fill="#b0b0b0" opacity="0.498"/>
+      <rect id="長方形_275" data-name="長方形 275" width="11.036" height="11.036" transform="translate(24 25.837)" fill="#b0b0b0" opacity="0.498"/>
+      <path id="パス_132" data-name="パス 132" d="M3.765,3.764h40.47v32H3.765ZM0,39.529H48V0H0Z" fill="#fff"/>
+      <g id="グループ_248" data-name="グループ 248">
+        <g id="グループ_247" data-name="グループ 247" clip-path="url(#clip-path)">
+          <path id="パス_133" data-name="パス 133" d="M97.791,153.425a2.1,2.1,0,0,0-3.509,0l-6.771,10.3L83.774,159.5a2.1,2.1,0,0,0-3.332.237L74.17,169.29h34.093Z" transform="translate(-67.217 -138.186)" fill="#fff"/>
+          <path id="パス_134" data-name="パス 134" d="M133.774,103.145a4.262,4.262,0,1,0-4.262-4.262,4.261,4.261,0,0,0,4.262,4.262" transform="translate(-117.37 -85.751)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

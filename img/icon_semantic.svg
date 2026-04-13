@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="長方形_284" data-name="長方形 284" width="31.603" height="40.016" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="icon_semantic" transform="translate(7 3.747)">
+    <rect id="長方形_258" data-name="長方形 258" width="48" height="48" transform="translate(-7 -3.747)" fill="none"/>
+    <g id="グループ_255" data-name="グループ 255" transform="translate(1.198 0.245)">
+      <rect id="長方形_280" data-name="長方形 280" width="17.848" height="1.705" transform="translate(6.878 30.807)" fill="#fff"/>
+      <rect id="長方形_281" data-name="長方形 281" width="17.848" height="1.705" transform="translate(6.878 23.891)" fill="#fff"/>
+      <rect id="長方形_282" data-name="長方形 282" width="17.848" height="1.706" transform="translate(6.878 16.976)" fill="#fff"/>
+      <rect id="長方形_283" data-name="長方形 283" width="8.412" height="1.705" transform="translate(16.313 10.061)" fill="#fff"/>
+      <g id="グループ_254" data-name="グループ 254">
+        <g id="グループ_253" data-name="グループ 253" clip-path="url(#clip-path)">
+          <path id="パス_139" data-name="パス 139" d="M27.965,0H13.2a4,4,0,0,0-2.825,1.17L1.17,10.378A4,4,0,0,0,0,13.2V36.377a3.643,3.643,0,0,0,3.639,3.639H27.965A3.643,3.643,0,0,0,31.6,36.377V3.638A3.642,3.642,0,0,0,27.965,0M11.914,2.528v8.179c0,.884-.344,1.229-1.228,1.229H2.506ZM29.557,36.377a1.594,1.594,0,0,1-1.592,1.592H3.639a1.594,1.594,0,0,1-1.593-1.592V13.755h9.735A1.955,1.955,0,0,0,13.733,11.8V2.046H27.965a1.594,1.594,0,0,1,1.592,1.591Z" transform="translate(0)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
