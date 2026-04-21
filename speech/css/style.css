@@ -1,0 +1,1460 @@
+/* ================================================
+   ailia AI Speech — speech.css
+   ================================================ */
+
+/* ════════════════════════════════════════
+   CSS変数
+   ════════════════════════════════════════ */
+:root {
+  --red:          #EC3055;
+  --red-dark:     #B5001F;
+  --red-light:    #FF4D6A;
+  --red-bg:       #FFF0F2;
+  --bg:           #ffffff;
+  --bg-sub:       #FFF5F6;
+  --border:       #F0DEDE;
+  --border-mid:   #D4AAAA;
+  --ink:          #272727;
+  --ink-mid:      #3D2020;
+  --ink-muted:    #696969;
+  --card-bg:      rgba(255,255,255,0.04);
+}
+
+/* ════════════════════════════════════════
+   RESET & BASE
+   ════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  scroll-behavior: smooth;
+  font-size: 62.5%;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* ←テキストとアイコン間 */
+
+  font-family: var(--font-body);
+  font-size: 15px; /* ←少し大きめ */
+  font-weight: 700;
+  line-height: 1;
+
+  padding: 14px 28px; /* ←高さと横幅のバランス */
+  border-radius: 999px;
+
+  border: 2px solid transparent; /* ←ghostとのズレ防止 */
+  cursor: pointer;
+  white-space: nowrap;
+
+  transition:
+    background-color .18s,
+    color .18s,
+    border-color .18s;
+}
+
+/* Primary */
+.btn--primary {
+  background: var(--red);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: transparent;
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* Ghost */
+.btn--ghost {
+  background: transparent;
+  border-color: var(--red); 
+  color: var(--red);
+}
+
+.btn--ghost:hover {
+  background: var(--red);
+  color: #fff;
+}
+/* フッターのお問い合わせボタンは角丸なし */
+footer .btnContact {
+  border-radius: 0;
+  border: none;
+}
+
+/* ════════════════════════════════════════
+   セクション共通
+   ════════════════════════════════════════ */
+section {
+  padding: 100px 5vw;
+}
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-label {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 3.5rem;
+  letter-spacing: 0em;
+  color: var(--ink);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 120px;
+  height: 24px;
+  background: url('../img/title_deco.webp') center / contain no-repeat;
+  margin-bottom: 0.8rem;
+}
+.section-sub {
+  color: var(--ink);
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5.5rem;
+}
+
+/* ════════════════════════════════════════
+   サブナビ
+   ════════════════════════════════════════ */
+#subNavArea {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 60px;
+  background-color: #ffffffd4;
+  backdrop-filter: blur(6px);
+  z-index: 60;
+  padding: 0 60px;
+  border-bottom: none;
+  gap: 48px;
+}
+#subNavArea .subNavTitle {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  width: 200px;
+  white-space: nowrap;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-menu ul {
+  display: flex !important;
+  flex-direction: row !important;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-menu ul li {
+  margin: 0 16px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.site-menu ul li a {
+  color: var(--ink);
+  transition: color .15s;
+}
+.site-menu a:hover,
+.subNavTitle:hover {
+  color: var(--red);
+}
+
+@media (max-width: 1023px) {
+  #subNavArea { top: 48px; }
+}
+@media (max-width: 767px) {
+  #subNavArea {
+    height: 50px;
+    padding: 0 16px;
+    gap: 12px;
+    top: 50px;
+  }
+  #subNavArea .subNavTitle {
+    font-size: 15px;
+    width: auto;
+  }
+  .site-menu ul li {
+    margin: 0 9px;
+    font-size: 11px;
+  }
+}
+/* ════════════════════════════════════════
+   HERO
+   ════════════════════════════════════════ */
+.hero {
+  background: #fff;
+  padding: 100px 6vw 0;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: flex-start;
+  gap: 0rem;
+  padding-bottom: 40px;
+}
+
+/* ─── 左：テキスト ─── */
+.hero-tag-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 1.3rem;
+  margin-bottom: 2.4rem;
+}
+
+.hero-tag {
+  background: var(--red);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  padding: 5px 14px;
+  border-radius: none;
+  white-space: nowrap;
+}
+
+.hero-product-name {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero-sub {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+
+.hero-catch {
+  font-size: clamp(30px, 4.5vw, 40px); 
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  margin-bottom: 2.4rem;
+}
+
+.hero-desc {
+  font-size: 1.6rem;
+  font-weight: 600;
+  max-width: 500px;
+  color: var(--ink);
+  line-height: 2;
+}
+
+/* ─── 右：画像＋メダル ─── */
+.hero-right {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: -30px;
+}
+
+.hero-main-img {
+  width: 100%;
+  max-width: 900px;
+  display: block;
+}
+.hero-medal {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 140px;
+  height: auto; 
+  z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .hero-right {
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .hero-main-img {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ─── 下部CTA ─── */
+.hero-cta-bar {
+  padding: 32px 6vw 24px;
+  text-align: right;
+}
+
+.hero-cta-inner {
+  max-width: 1100px;
+  margin: 0;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.hero-cta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.hero-cta-label {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 0cap;
+  padding-left: 40px; /* 画像の幅分だけ右にずらす */
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+}
+
+.hero-cta-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-right: -40px; /* ボタンに重ねる */
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 40px 24px 56px; /* 左側に画像の重なり分だけ余白 */
+  border-radius: 999px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 280px;
+  transition: background .18s, color .18s;
+  text-decoration: none;
+}
+
+
+.hero-cta-btn--ghost {
+  border: 2px solid var(--red);
+  color: var(--ink);
+  background: #fff;
+}
+
+.hero-cta-btn--ghost:hover {
+  background: var(--red-bg);
+}
+
+.hero-cta-btn--primary {
+  background: var(--red);
+  color: #fff;
+  border: 2px solid var(--red);
+}
+
+.hero-cta-btn--primary:hover {
+  background: var(--red-dark);
+  border-color: var(--red-dark);
+}
+
+.hero-wer-note {
+  font-size: 1.1rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+  text-align: right;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ─── レスポンシブ ─── */
+@media (max-width: 767px) {
+  .hero {
+    padding: 90px 5vw 0;
+  }
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .hero-right {
+    justify-content: center;
+  }
+
+  .hero-medal img {
+    width: 100px;
+    height: 100px;
+
+  }
+  .hero-desc {
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+    max-width: 100%;
+  }
+
+  .medal-wer strong { font-size: 2.2rem; }
+  .hero-catch { font-size: 26px; }
+  .hero-cta-btn {
+    min-width: unset;
+    width: 100%;
+    justify-content: center;
+    font-size: 1.6rem;
+  }
+}
+
+/* ════════════════════════════════════════
+   リード文
+   ════════════════════════════════════════ */
+.lead-section {
+  padding: 50px 5vw;
+  text-align: center;
+  background: #f2f2f2d6;
+}
+.lead-title {
+  font-size: clamp(2.2rem, 3vw, 2.8rem);
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 1.4rem;
+}
+.lead-text {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 2;
+}
+
+/* ════════════════════════════════════════
+   ご利用シーン
+   ════════════════════════════════════════ */
+.usecases {
+  background: #fff;
+  text-align: center;
+}
+
+.case-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin-top: 2rem;
+}
+
+.case-row {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;  /* before | 矢印 | after+result */
+  align-items: center;
+  overflow: hidden;
+  background: var(--bg-sub);
+  border-radius: 20px;
+}
+
+/* ─── Before ─── */
+.case-before {
+  display: flex;
+  align-items: center;
+  padding: 3rem 2rem 3rem 3rem;
+}
+
+.case-before img {
+  width: 280px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.case-before-text {
+  text-align: left;
+  padding-left: 1.6rem;
+}
+
+.case-number {
+  display: block;
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--red);
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.case-before-text p {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+/* ─── 矢印（中央カラム） ─── */
+.case-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  padding-right: 30px;
+  color: var(--red);
+}
+
+/* ─── After + Result ─── */
+.case-after-wrap {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem 3rem 3rem 1rem;
+
+}
+
+.case-after-text {
+  flex: 1;
+}
+
+.case-after-main {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.7;
+  text-align: left;
+}
+
+.case-after-main em {
+  color: var(--red);
+  font-style: normal;
+}
+
+.case-after-wrap img {
+  width: 300px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+/* ─── レスポンシブ ─── */
+@media (max-width: 767px) {
+  .case-row {
+    grid-template-columns: 1fr;
+  }
+  .case-arrow {
+    transform: rotate(90deg);
+    padding: 0.5rem 0;
+  }
+  .case-after-wrap {
+    flex-direction: column;
+    padding: 2rem;
+    text-align: center;
+  }
+}
+/* ════════════════════════════════════════
+   特徴と機能
+   ════════════════════════════════════════ */
+.features-section {
+  padding: 80px 5vw;
+  text-align: center;
+  background: #f2f2f2d6;
+}
+.features-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 6rem;
+  text-align: left;
+}
+.features-intro-img img {
+  width: 100%;
+  border-radius: 12px;
+}
+.feature-number {
+  font-size: 8rem;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: -1rem;
+  opacity: 0.15;
+}
+.feature-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+.feature-text {
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  line-height: 1.9;
+}
+
+@media (max-width: 767px) {
+  .features-intro {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── 機能一覧グリッド ── */
+.funclist-section {
+  background: #fff;
+  padding: 80px 5vw;
+  text-align: center;
+}
+.funclist-section .section-sub {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 4rem;
+}
+.func-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 3rem;
+  margin-bottom: 5rem;
+  text-align: center;
+}
+.func-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.func-icon {
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  background: var(--red-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.func-icon svg {
+  width: 60px;
+  height: 60px;
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.func-item h4 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.func-item p {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+/* 追加予定 */
+.funcadd-section {
+  background: var(--red-bg);
+  padding: 60px 5vw;
+  text-align: center;
+}
+.funcadd-label {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.08em;
+}
+.funcadd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.funcadd-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: center;
+  border: none;
+}
+.funcadd-item img {
+  width: 150px;
+  margin: 0 auto 1rem;
+}
+
+/* ════════════════════════════════════════
+   Getting Started（導入フロー）
+   ════════════════════════════════════════ */
+.flow-section {
+  background: #fff;
+  padding: 80px 5vw;
+  text-align: center;
+}
+.flow-img {
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+}
+.flow-img img {
+  width: 100%;
+}
+.flow-support {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+.flow-support-text {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3rem;
+}
+.flow-cta {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/*
+/* ════════════════════════════════════════
+   AI活用ヒント（Tips / White Paper）
+   ════════════════════════════════════════ 
+.tips-section {
+  background: #f2f2f2d6;
+  padding: 80px 5vw;
+}
+.tips-section .section-inner {
+  text-align: center;
+}
+.tips-section {
+  font-size: 2.4rem;
+}
+.tips-section {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  margin-bottom: 4rem;
+}
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2.5rem;
+  text-align: left;
+}
+.tip-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.tip-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.tip-card-body {
+  padding: 1.8rem;
+}
+.tip-card-date {
+  font-size: 1.2rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.tip-card-tag {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: var(--red-bg);
+  color: var(--red);
+  padding: 2px 10px;
+  border-radius: 999px;
+  margin-bottom: 0.8rem;
+}
+.tip-card h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+.tip-card p {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+.tip-card a {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--red);
+  text-decoration: underline;
+}
+
+/* ════════════════════════════════════════
+   ホワイトペーパー ダウンロードモーダル
+   ════════════════════════════════════════ 
+#wp-download {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 200;
+  background: rgba(0,0,0,0.5);
+  display: none;
+}
+
+.wp-downloadbox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 560px;
+  max-width: 90vw;
+  background: #fff;
+  border-radius: 12px;
+  border: 2px solid var(--red);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+  padding: 48px 40px 40px;
+}
+
+.wp-btn-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+}
+
+.wp-btn-close a {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  cursor: pointer;
+  letter-spacing: 0.1em;
+}
+
+.wp-btn-close a:hover {
+  color: var(--red);
+}
+
+.wp-download-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--red);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.wp-download-lead {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.wp-dlitem {
+  text-align: center;
+}
+
+.wp-btnbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wp-btntext {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+
+.wp-btnbox a {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  padding: 14px 48px;
+  border-radius: 999px;
+  transition: background .18s;
+  text-decoration: none;
+}
+
+.wp-btnbox a:hover {
+  background: var(--red-dark);
+}
+
+@media (max-width: 767px) {
+  .wp-downloadbox {
+    padding: 40px 24px 32px;
+  }
+}
+*/
+/* ════════════════════════════════════════
+   FAQ
+   ════════════════════════════════════════ */
+.faq-section {
+  background: #f2f2f2d6;
+  padding: 80px 5vw;
+}
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 3rem 0;
+}
+.faq-item:first-child {
+  border-top: 1px solid var(--border);
+}
+.faq-q {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+.faq-q::before {
+  content: 'Q';
+  color: var(--red);
+  font-size: 2rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+.faq-a {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  line-height: 1.9;
+  padding-left: 3.2rem;
+}
+
+/* ════════════════════════════════════════
+   サポート
+   ════════════════════════════════════════ */
+.support-section {
+  background: #ffffffd6;
+  padding: 80px 5vw;
+  text-align: center;
+}
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 4rem;
+}
+.support-card {
+  padding: 2.5rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.support-card img {
+  height: 120px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.support-card p {
+  color: var(--ink);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
+.support-card a {
+  display: inline-block;
+  padding: 9px 32px;
+  border: 2px solid var(--red);
+  color: var(--red);
+  font-size: 1.4rem;
+  font-weight: 700;
+  border-radius: 999px;
+  transition: background .2s, color .2s;
+}
+.support-card a:hover {
+  background: var(--red);
+  color: #fff;
+}
+.support-card.primary a {
+  background: var(--red);
+  color: #fff;
+}
+.support-card.primary a:hover {
+  background: transparent;
+  color: var(--red);
+}
+.support-cta {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  color: var(--ink);
+}
+
+/* ════════════════════════════════════════
+   アイリア WORKS
+   ════════════════════════════════════════ */
+.works-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 5vw;
+}
+
+.works-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  filter: brightness(1);
+}
+
+.works-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.works-logo img {
+  height: 140px;
+}
+
+.works-title {
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  font-weight: 700;
+  color: #fff;
+}
+
+.works-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+  line-height: 2;
+}
+
+.btn--works {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  background:#0a87db;
+  border: none;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  transition: background 0.2s;
+}
+
+.btn--works:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  color: #333;
+  border-radius: 50%;
+  font-size: 1.2rem;
+}
+/* ════════════════════════════════════════
+   採用企業
+   ════════════════════════════════════════ */
+.companies {
+  background: #fff;
+  text-align: center;
+  padding: 80px 5vw;
+}
+.companies .section-label {
+  justify-content: center;
+}
+.logos-spacer { height: 6rem; }
+.logos-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5rem 6rem;
+  justify-content: center;
+  align-items: center;
+}
+.logos-row img {
+  height: 60px;
+  transition: opacity 0.2s;
+}
+@media (max-width: 767px) {
+  .logos-row { gap: 1.5rem 2rem; }
+  .logos-row img { height: 30px; }
+}
+/* subNavも連動 */
+#subNavArea {
+  transition: transform 0.3s ease;
+}
+#subNavArea.subnav--hidden {
+  transform: translateY(-100%);
+}
+
+/* ════════════════════════════════════════
+   スクロールフェードイン
+   ════════════════════════════════════════ */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-fade.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.scroll-fade:nth-child(1) { transition-delay: 0s; }
+.scroll-fade:nth-child(2) { transition-delay: 0.1s; }
+.scroll-fade:nth-child(3) { transition-delay: 0.2s; }
+.scroll-fade:nth-child(4) { transition-delay: 0.3s; }
+.scroll-fade:nth-child(5) { transition-delay: 0.4s; }
+.scroll-fade:nth-child(6) { transition-delay: 0.5s; }
+.scroll-fade:nth-child(7) { transition-delay: 0.6s; }
+.scroll-fade:nth-child(8) { transition-delay: 0.7s; }
+
+
+/* ════════════════════════════════════════
+   SP対応（767px以下）まとめ
+   ════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+  /* ─── 共通 ─── */
+  section {
+    padding: 60px 5vw;
+  }
+  .section-label {
+    font-size: 2.6rem;
+  }
+  .section-sub {
+    font-size: 1.6rem;
+    margin-bottom: 3rem;
+  }
+
+  /* ─── Hero ─── */
+  .hero {
+    padding: 80px 5vw 0;
+  }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-bottom: 20px;
+  }
+  .hero-tag-wrap {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1.6rem;
+  }
+  .hero-product-name {
+    font-size: 36px;
+  }
+  .hero-sub {
+    font-size: 1.6rem;
+  }
+  .hero-catch {
+    font-size: 26px;
+    margin-bottom: 1.6rem;
+  }
+  .hero-desc {
+    font-size: 1.4rem;
+    max-width: 100%;
+  }
+  .hero-right {
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .hero-medal {
+    width: 90px;
+    top: 0;
+    right: 0;
+  }
+  .hero-cta-bar {
+    padding: 24px 5vw 16px;
+  }
+  .hero-cta-inner {
+    flex-direction: column;
+    gap: 2.4rem;
+    align-items: center;
+  }
+  .hero-cta-item {
+    width: 100%;
+    max-width: 340px;
+  }
+  .hero-cta-btn {
+    width: 100%;
+    min-width: unset;
+    font-size: 1.6rem;
+    padding: 20px 32px 20px 48px;
+  }
+  .hero-cta-label {
+    font-size: 1.2rem;
+    padding-left: 0;
+    justify-content: center;
+  }
+  .hero-cta-img {
+    width: 60px;
+    height: 60px;
+    margin-right: -30px;
+  }
+  .hero-wer-note {
+    text-align: center;
+  }
+
+  /* ─── リード文 ─── */
+  .lead-title {
+    font-size: 2rem;
+  }
+  .lead-text {
+    font-size: 1.5rem;
+  }
+
+  /* ─── ご利用シーン ─── */
+  .case-row {
+    grid-template-columns: 1fr;
+    border-radius: 12px;
+  }
+  .case-before {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.4rem 2rem 1.6rem;
+  }
+  .case-before img {
+    width: 180px;
+    margin-bottom: 1.2rem;
+  }
+  .case-before-text {
+    padding-left: 0;
+    text-align: center;
+  }
+  .case-number {
+    font-size: 1.8rem;
+  }
+  .case-before-text p {
+    font-size: 1.5rem;
+  }
+  .case-arrow {
+    transform: rotate(90deg);
+    padding: 0.4rem 0;
+    justify-content: center;
+  }
+  .case-after-wrap {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.6rem 2rem 2.4rem;
+    gap: 1.4rem;
+  }
+  .case-after-main {
+    font-size: 1.7rem;
+    text-align: center;
+  }
+  .case-after-wrap img {
+    width: 200px;
+  }
+
+  /* ─── 特徴と機能 ─── */
+
+  .feature-number {
+    font-size: 6rem;
+  }
+  .feature-title {
+    font-size: 2.2rem;
+  }
+  .feature-text {
+    font-size: 1.5rem;
+  }
+  @media (max-width: 767px) {
+
+  /* 特徴と機能：SP版は常にテキスト→画像の順に */
+  .features-intro {
+    direction: ltr !important;  /* rtlを上書き */
+  }
+  .features-intro .features-intro-text {
+    order: 1;
+  }
+  .features-intro .features-intro-img {
+    order: 2;
+  }
+
+}
+
+  /* ─── 機能一覧 ─── */
+  .func-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .func-icon {
+    width: 120px;
+    height: 120px;
+  }
+  .func-item h4 {
+    font-size: 1.5rem;
+  }
+  .func-item p {
+    font-size: 1.3rem;
+  }
+
+  /* ─── 追加予定 ─── */
+  .funcadd-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+  .funcadd-item {
+    font-size: 1.3rem;
+    padding: 1.5rem 1rem;
+  }
+  .funcadd-item img {
+    width: 100px;
+  }
+
+  /* ─── 導入フロー ─── */
+  .flow-support {
+    font-size: 1.8rem;
+  }
+  .flow-support-text {
+    font-size: 1.4rem;
+  }
+  .flow-cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .flow-cta .btn {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  /* ─── FAQ ─── */
+  .faq-q {
+    font-size: 1.6rem;
+  }
+  .faq-a {
+    font-size: 1.4rem;
+    padding-left: 2.4rem;
+  }
+
+  /* ─── サポート ─── */
+  .support-grid {
+    grid-template-columns: 1fr;
+  }
+  .support-card {
+    padding: 2rem 1.5rem;
+  }
+  .support-card img {
+    height: 80px;
+  }
+
+  /* ─── ailia WORKS ─── */
+  .works-title {
+    font-size: 1.8rem;
+  }
+  .works-text {
+    font-size: 1.4rem;
+  }
+  .works-logo img {
+    height: 100px;
+  }
+
+  /* ─── 採用企業 ─── */
+  .logos-row {
+    gap: 2rem 2.5rem;
+  }
+  .logos-row img {
+    height: 28px;
+  }
+
+}
+
+/* ════════════════════════════════════════
+   375px（小型スマートフォン）
+   ════════════════════════════════════════ */
+@media (max-width: 375px) {
+  .hero-catch {
+    font-size: 20px;
+  }
+  .hero-product-name {
+    font-size: 28px;
+  }
+  .func-grid {
+    grid-template-columns: 1fr;
+  }
+  .funcadd-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-cta-btn {
+    font-size: 1.4rem;
+    padding: 18px 24px 18px 40px;
+  }
+}
+/* ════════════════════════════════════════
+   英語版フォント上書き
+   ════════════════════════════════════════ */
+html[lang="en"] body {
+  font-family: "Poppins", "Noto Sans JP", sans-serif;
+}
+
+html[lang="en"] .hero-catch,
+html[lang="en"] .hero-product-name,
+html[lang="en"] .feature-title,
+html[lang="en"] .section-label,
+html[lang="en"] .case-number,
+html[lang="en"] .flow-support,
+html[lang="en"] .works-title {
+  font-family: "Poppins", sans-serif;
+}

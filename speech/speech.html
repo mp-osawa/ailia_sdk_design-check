@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>AI Speech | アイリア AI Series</title>
+  <meta name="description" content="リアルタイム音声認識ライブラリ。オフライン対応。クロスプラットフォームで使えるAI音声認識。">
+  <meta property="og:site_name" content="ailia AI Speech ｜ailia AI Series" />
+  <meta property="og:title" content="ailia AI Speech ｜ailia AI Series" />
+  <meta property="og:description" content="リアルタイム音声認識ライブラリ。オフライン対応。クロスプラットフォームで使えるAI音声認識。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://ailia.ai/speech/" />
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+ <link rel="stylesheet" property="stylesheet" href="css/common.css" media="all">
+ <link rel="stylesheet" href="css/header.css">
+ <link rel="stylesheet" href="css/style.css">
+
+ <link rel="icon" type="image/png" href="img/favicon.png" sizes="16x16">
+ <link rel="apple-touch-icon" href="img/favicon.png" sizes="180x180">
+ <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="js/smoothScroll.js"></script>
+	<script type="text/javascript" src="js/top.js"></script>
+	<script type="text/javascript" src="js/spnavi.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/profmodal.js"></script>
+	<script type="text/javascript" src="js/move.js"></script>
+	<script type="text/javascript" src="js/jquery-modal-video.min.js"></script>
+  <script type="text/javascript" src="js/top_blog.js"></script>
+  <script type="text/javascript" src="js/ailia_dx_chat.js"></script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5Q579RMM');</script>
+<!-- End Google Tag Manager -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ============================================================
+     header
+     ============================================================ -->
+<header id="header">
+  <nav>
+    <div class="navArea">
+      <div class="inner cw">
+        <h1>
+          <a class="navLogo" href="/">
+            <img src="img/common/logo.svg" alt="ailia">
+            <span class="siteTitle">アイリア</span>
+          </a>
+        </h1>
+        <ul class="navList">
+          <li><a href="/" class="">アイリアAIシリーズ</a></li>
+          <li><a href="/ai-computing/" class="ai-computing">AIコンピューティング</a></li>
+          <li><a href="/ai-application/" class="ai-application">AIアプリケーション</a></li>
+          <li><a href="/company/" class="company">会社情報</a></li>
+          <li class="lang">
+            <a href="/speech/" class="current" lang="jp">JP</a>
+            <a href="/en/speech/" lang="en">EN</a>
+          </li>
+          <li class="contact">
+            <a href="https://ailia.ai/contact/" target="_blank">お問い合わせ</a>
+          </li>
+        </ul>
+        <a href="https://ailia.ai/contact/" target="_blank" class="spContact">お問い合わせ</a>
+        <a class="spNavBtn" href="javascript:void(0);"><span></span><span></span><span></span></a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- サブナビ -->
+<div id="subNavArea">
+  <a href="#hero" class="subNavTitle">AI Speech</a>
+  <div class="site-menu-inner">
+    <nav class="site-menu">
+      <ul>
+        <li><a href="#cases">ご利用シーン</a></li>
+        <li><a href="#features-section">特徴と機能</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#support-section">サポート</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+
+    <!-- 左：テキスト -->
+    <div class="hero-text">
+      <div class="hero-tag-wrap">
+        <span class="hero-tag">音声認識ライブラリ</span>
+        <span class="hero-product-name">AI Speech</span>
+      </div>
+      <p class="hero-sub">＼オフラインでも動く！／</p>
+      <h1 class="hero-catch">
+        どんなプラットフォーム<br>にも対応する、<br>リアルタイム音声認識機能
+      </h1>
+      <p class="hero-desc">
+        あなたのサービスやプロダクトに、
+        Open AI社の「Whisper」を活用した超高精度な
+        音声認識機能をプラス。
+        オフラインでも動くので、
+        セキュアな環境でも安心してお使いいただけます。
+      </p>
+    </div>
+
+    <!-- 右：メイン画像 + メダル -->
+    <div class="hero-right">
+     <img class="hero-main-img" src="img/main_img.png" alt="main_img">
+     <img class="hero-medal" src="img/mv_medal.png" alt="...">
+   </div>
+
+  </div>
+
+  <!-- 下部CTA -->
+  <div class="hero-cta-bar">
+    <div class="hero-cta-inner">
+  <div class="hero-cta-item">
+    <small class="hero-cta-label">30日間無料デモアプリダウンロード</small>
+    <div class="hero-cta-row">
+      <img class="hero-cta-img" src="img/btnicon_pc.webp" alt="" onerror="this.style.display='none'">
+      <a class="hero-cta-btn hero-cta-btn--ghost" href="https://axip-console.appspot.com/trial/terms/AILIA-SPEECH?lang=ja">AIを使ってみる</a>
+    </div>
+  </div>
+  <div class="hero-cta-item">
+    <small class="hero-cta-label">無料個別相談にも対応</small>
+    <div class="hero-cta-row">
+      <img class="hero-cta-img" src="img/btnicon_voice.webp" alt="" onerror="this.style.display='none'">
+      <a class="hero-cta-btn hero-cta-btn--primary" href="https://ailia.ai/contact/" target="_blank">導入のご相談</a>
+    </div>
+  
+  </div>
+</div>
+    <p class="hero-wer-note">※Word Error Rate</p>
+  </div>
+</section>
+
+<!-- ════════ リード文 ════════ -->
+<section class="lead-section">
+  <div class="section-inner">
+    <h2 class="lead-title">OpenAIの「Whisper」を使用した、高精度音声認識</h2>
+    <p class="lead-text">
+      ChatGPTで知られるOpenAIのモデルを搭載し、高精度な音声認識を実現。<br>
+      文字起こしだけでなく、その後の編集にかかる時間・手間を大幅に削減し、生産性向上につながります。
+    </p>
+  </div>
+</section>
+
+<!-- ════════ ご利用シーン ════════ -->
+<section class="usecases" id="cases">
+  <div class="section-inner">
+    <div class="section-label">ご利用シーン</div>
+    <p class="section-sub">音声認識AIはさまざまなシーンで業務効率化・拡大を実現します。</p>
+
+    <div class="case-list">
+
+      <!-- Case 01 -->
+      <div class="case-row scroll-fade">
+        <div class="case-before">
+          <img src="img/sean0101.png" alt="議事録作成">
+          <div class="case-before-text">
+            <span class="case-number">Case_01</span>
+            <p>経営会議の議事録作成は<br>毎回人手がかかる・・・</p>
+          </div>
+        </div>
+        <div class="case-arrow">▶</div>
+        <div class="case-after-wrap">
+         <p class="case-after-main"><em>機密性の高い会議でもオフラインで自動議事録作成！</em></p>
+         <img src="img/sean0102.png" alt="オフライン議事録">
+       </div>
+      </div>
+
+      <!-- Case 02 -->
+      <div class="case-row scroll-fade">
+        <div class="case-before">
+          <img src="img/sean0201.png" alt="翻訳手配">
+          <div class="case-before-text">
+            <span class="case-number">Case_02</span>
+            <p>国際会議は<br>毎回通訳の手配が大変・・・</p>
+          </div>
+        </div>
+        <div class="case-arrow">▶</div>
+        <div class="case-after-wrap">
+         <p class="case-after-main"><em>リアルタイム翻訳で人件費を削減。99言語に対応</em></p>
+         <img src="img/sean0202.png" alt="リアルタイム翻訳">
+       </div>
+      </div>
+
+      <!-- Case 03 -->
+      <div class="case-row scroll-fade">
+        <div class="case-before">
+          <img src="img/sean0301.png" alt="製造現場">
+          <div class="case-before-text">
+            <span class="case-number">Case_03</span>
+            <p>製造現場の<br>生産性を向上させたい・・・</p>
+          </div>
+        </div>
+        <div class="case-arrow">▶</div>
+        <div class="case-after-wrap">
+         <p class="case-after-main"><em>機械への音声入力で製造プロセスを効率化！</em></p>
+         <img src="img/sean0302.png" alt="音声で製造効率化">
+        </div>
+      </div>
+
+      <!-- Case 04 -->
+      <div class="case-row scroll-fade">
+        <div class="case-before">
+          <img src="img/sean0401.png" alt="手が使えない環境">
+          <div class="case-before-text">
+            <span class="case-number">Case_04</span>
+            <p>手が使えない環境で<br>メモを取りたい・・・</p>
+          </div>
+        </div>
+        <div class="case-arrow">▶</div>
+        <div class="case-after-wrap">
+          <p class="case-after-main"><em>音声入力でAIが正確に文字起こし。スマートフォンでも！</em></p>
+          <img src="img/sean0402.png" alt="スマートフォンで文字起こし">
+        </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 主な特徴 ════════ -->
+<section class="features-section scroll-fade" id="features-section">
+  <div class="section-inner">
+    <div class="section-label">特徴と機能</div>
+    <p class="section-sub">アイリア AI Speechならではの導入メリットや充実の機能をご紹介します。</p>
+
+    <!-- 特徴1 -->
+    <div class="features-intro scroll-fade">
+      <div class="features-intro-text">
+        <div class="feature-number">01</div>
+        <div class="feature-title">AIを活用した超高精度な音声認識</div>
+        <p class="feature-text">ChatGPTを開発したOpen AI社のAIモデルを採用し、高精度な音声認識を実現しました。文字起こしはもちろん、その後の手直しの手間が大幅に軽減され、生産性アップにつながります。</p>
+      </div>
+      <div class="features-intro-img">
+        <img src="https://www.ailia.ai/hubfs/ailia_img/function01.png" alt="超高精度AI音声認識" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmZjBmMiIvPjx0ZXh0IHg9IjIwMCIgeT0iMTYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjRUMzMDU1Ij7otoXnpL7jga7nqK3lpI08L3RleHQ+PC9zdmc+'">
+      </div>
+    </div>
+
+    <!-- 特徴2 -->
+    <div class="features-intro scroll-fade" style="direction:rtl;">
+      <div class="features-intro-text" style="direction:ltr;">
+        <div class="feature-number">02</div>
+        <div class="feature-title">オフラインで安全・安心</div>
+        <p class="feature-text">クラウドにアクセスせずオフラインで動作するため、機密性の高い情報も情報漏洩リスクを最小限に抑えながら安全に記録可能。通信環境に左右されず、どこでも安心して使えます。長時間の会議にも時間制限なく対応します。</p>
+      </div>
+      <div class="features-intro-img" style="direction:ltr;">
+        <img src="https://www.ailia.ai/hubfs/ailia_img/function02.png" alt="オフライン対応" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmZjBmMiIvPjx0ZXh0IHg9IjIwMCIgeT0iMTYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjRUMzMDU1Ij7jgqrjg5Xjg6njga7lronlhajjgYzlronlhajjga8877yBPjwvdGV4dD48L3N2Zz4='">
+      </div>
+    </div>
+
+    <!-- 特徴3 -->
+    <div class="features-intro scroll-fade">
+      <div class="features-intro-text">
+        <div class="feature-number">03</div>
+        <div class="feature-title">高い汎用性の開発・運用環境</div>
+        <p class="feature-text">既存のシステムやアプリケーションへの組み込みも可能なライブラリ形式で提供。C APIに加え、UnityプラグインにもHaveしており、Unity開発のアプリへの音声認識機能追加も容易です。</p>
+      </div>
+      <div class="features-intro-img">
+        <img src="https://www.ailia.ai/hubfs/ailia_img/function03.png" alt="高い汎用性" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmZjBmMiIvPjx0ZXh0IHg9IjIwMCIgeT0iMTYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjRUMzMDU1Ij7pgq3nlKjmlbDjga7plofjgqnjgqTjg5XjgqXjg7w8L3RleHQ+PC9zdmc+'">
+      </div>
+    </div>
+
+    <!-- 特徴4 -->
+    <div class="features-intro scroll-fade" style="direction:rtl;">
+      <div class="features-intro-text" style="direction:ltr;">
+        <div class="feature-number">04</div>
+        <div class="feature-title">定額制で導入しやすい</div>
+        <p class="feature-text">サーバを使用しないため、使用量に応じた課金なしで使い放題。ユーザー数が増えても追加費用はかかりません。</p>
+      </div>
+      <div class="features-intro-img" style="direction:ltr;">
+        <img src="https://www.ailia.ai/hubfs/ailia_img/function04.png" alt="固定料金" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ZmZjBmMiIvPjx0ZXh0IHg9IjIwMCIgeT0iMTYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmaWxsPSIjRUMzMDU1Ij7lm5vlpKnnlKjph43jgafpgI/lhaXjga7jgqPjgq3jgqTjg5Q8L3RleHQ+PC9zdmc+'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 機能一覧 ════════ -->
+<section class="funclist-section scroll-fade">
+  <div class="section-inner">
+    <div class="section-label">実用的かつ豊富な機能</div>
+    <p class="section-sub">現場で役立つ機能を豊富に揃えています。</p>
+
+    <div class="func-grid">
+
+      <div class="func-item scroll-fade">
+        <div class="func-icon">
+          <img src="img/funcicon01.png" alt="99言語" style="width:150px;height:150px;object-fit:contain;" onerror="this.style.display='none'">
+        </div>
+        <h4>99言語対応</h4>
+        <p>マルチリンガルのAIモデルを使用しており、日本語・中国語・英語を含む99言語の認識が可能です。</p>
+      </div>
+
+      <div class="func-item scroll-fade">
+        <div class="func-icon">
+          <img src="img/funcicon02.png" alt="オフライン" style="width:150px;height:150px;object-fit:contain;" onerror="this.style.display='none'">
+        </div>
+        <h4>オフライン</h4>
+        <p>クラウド不要で端末だけで音声認識を実行可能です。機密度の高い内容でも安全に実行可能です。</p>
+      </div>
+
+      <div class="func-item scroll-fade">
+        <div class="func-icon">
+          <img src="img/funcicon03.png" alt="翻訳" style="width:150px;height:150px;object-fit:contain;" onerror="this.style.display='none'">
+        </div>
+        <h4>翻訳</h4>
+        <p>中国語・日本語を含む99言語を英語に翻訳可能です。</p>
+      </div>
+
+      <div class="func-item scroll-fade">
+        <div class="func-icon">
+          <img src="img/funcicon04.png" alt="マルチデバイス" style="width:150px;height:150px;object-fit:contain;" onerror="this.style.display='none'">
+        </div>
+        <h4>マルチデバイス対応</h4>
+        <p>Windows PC だけでなく、macOS、iOS、Android、Linuxでも動作します。</p>
+      </div>
+
+      <div class="func-item scroll-fade">
+        <div class="func-icon">
+          <img src="img/funcicon05.png" alt="辞書" style="width:150px;height:150px;object-fit:contain;" onerror="this.style.display='none'">
+        </div>
+        <h4>辞書登録</h4>
+        <p>CSVの辞書を読み込んで、音声認識誤りを置換します。</p>
+      </div>
+
+      <div class="func-item scroll-fade">
+        <div class="func-icon">
+          <img src="img/funcicon06.png" alt="話者識別" style="width:150px;height:150px;object-fit:contain;" onerror="this.style.display='none'">
+        </div>
+        <h4>話者識別</h4>
+        <p>誰が話しているかを自動で見分け、複数話者の会話も正確に整理。会議記録や対話ログの精度を高めます。</p>
+      </div>
+
+      <div class="func-item scroll-fade">
+        <div class="func-icon">
+          <img src="img/funcicon07.png" alt="無音検知" style="width:150px;height:150px;object-fit:contain;" onerror="this.style.display='none'">
+        </div>
+        <h4>無音検知</h4>
+        <p>音声中の無音区間を自動検出し、不要な部分をスキップ。録音・解析の効率を大幅に改善します。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 追加予定機能 ════════ -->
+<section class="funcadd-section scroll-fade">
+  <div class="section-inner">
+    <p class="funcadd-label">＼ 追加実装予定 ／</p>
+    <p style="font-size:1.6rem;font-weight:600;color:var(--ink);margin-bottom:3rem;">今後も新AIモデルの組み込みや便利な機能の追加を続けていきます。</p>
+    <div class="funcadd-grid">
+      <div class="funcadd-item">
+        <img src="img/funcadd02.webp" alt="要約" onerror="this.style.display='none'">
+        要約
+      </div>
+      <div class="funcadd-item">
+        <img src="img/funcadd03.webp" alt="句読点補完" onerror="this.style.display='none'">
+        句読点追加
+      </div>
+      <div class="funcadd-item">
+        <img src="img/funcadd05.webp" alt="音声コマンド" onerror="this.style.display='none'">
+        音声コマンド
+      </div>
+      <div class="funcadd-item">
+        <img src="img/funcadd06.webp" alt="数値入力" onerror="this.style.display='none'">
+        数値入力
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 導入フロー ════════ -->
+<section class="flow-section scroll-fade" id="flow">
+  <div class="section-inner">
+    <div class="section-label">導入フロー</div>
+    <p class="section-sub">導入からサポートまでの流れをご紹介します。お気軽にお試しください！</p>
+    <div class="flow-img">
+      <img src="img/flow.png" alt="導入フロー" onerror="this.style.display='none'">
+    </div>
+    <p class="flow-support">専門のスタッフが一環してサポートします。</p>
+    <p class="flow-support-text">
+    導入〜開発〜使用中のサポートは、メール・お電話・MTGいずれも対応可能です。<br>開発拠点・本社機能ともに国内のため、迅速かつ手厚くフォローアップさせていただきます。</p>
+    <div class="flow-cta">
+      <a class="btn btn--primary" href="https://axip-console.appspot.com/trial/terms/AILIA-SPEECH?lang=ja">30日間無料デモをダウンロード</a>
+      <a class="btn btn--ghost" href="https://ailia.ai/contact/">無料個別相談を申し込む</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ AI活用ヒント ════════ 
+
+<section class="tips-section scroll-fade" id="hint">
+  <div class="section-inner">
+    <div class="section-label">AI活用のお役立ちヒント</div>
+    <p class="section-sub">音声認識技術はどのようにビジネスに役立つの？わかりやすくご紹介します。</p>
+
+    <div class="tips-grid">
+
+      <div class="tip-card scroll-fade">
+        <img src="img/ax_WP02.jpg" alt="ホワイトペーパー" onerror="this.style.background='#fff0f2';this.style.height='200px'">
+        <div class="tip-card-body">
+          <span class="tip-card-date">2023.09.13</span>
+          <span class="tip-card-tag">ホワイトペーパー</span>
+          <h3>なかの人が徹底解説<br>ゼロから知る6つの『ailia』とは?</h3>
+          <p>AI開発におけるさまざまな領域で、幅広いソリューション＆サービスを展開している「ailia（アイリア）」。その特性やラインナップについて、分かりやすくご紹介します。</p>
+          <a class="dllink" data-wp="wp02" href="javascript:void(0);">PDF（日本語）無料ダウンロード</a>
+        </div>
+      </div>
+
+      <div class="tip-card scroll-fade">
+        <img src="img/ax_WP01.jpg" alt="Whisperホワイトペーパー" onerror="this.style.background='#fff0f2';this.style.height='200px'">
+        <div class="tip-card-body">
+          <span class="tip-card-date">2023.07.13</span>
+          <span class="tip-card-tag">ホワイトペーパー</span>
+          <h3>Whisperを使いこなす！エッジで使える<br>安心・安全な音声認識AIの条件とは？</h3>
+          <p>「AI音声認識って？」「Whisperってなにがすごい？」。音声認識AIの基礎知識と、エッジで使える安心・安全な音声認識AIの条件についてご紹介。</p>
+          <a class="dllink" data-wp="wp01" href="javascript:void(0);">PDF（日本語）無料ダウンロード</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+-->
+
+<!-- ════════ FAQ ════════ -->
+<section class="faq-section scroll-fade" id="faq">
+  <div class="section-inner">
+    <div class="section-label" style="text-align:center;">よくあるご質問</div>
+    <p class="section-sub">よくいただく質問と回答を掲載しています。</p>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <p class="faq-q">利用可能なパソコン・スマートフォンのスペックを教えてください。</p>
+        <div class="faq-a">
+          WindowsおよびLinux環境ではCore i7以上のCPUと8GB以上のメモリが必要です。<br>
+          macOS環境ではM1以上のCPUと8GB以上のメモリが必要です。<br>
+          iOS環境ではA15以上のCPUと4GB以上のメモリが必要です。<br>
+          Android環境ではSnapdragon888以上のCPUと4GB以上のメモリが必要です。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">GPUは使用できますか？</p>
+        <div class="faq-a">macOSおよびiOSではMetal、WindowsおよびLinuxではCUDAが使用可能です。GPUを使用した音声認識はCPUよりも大幅に高速です。</div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">音声認識の精度を向上させるには？</p>
+        <div class="faq-a">音声認識においてマイクの性能は非常に重要です。精度が不十分な場合は、ピンマイクや指向性の高いマイクの使用をご検討ください。</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ サポート ════════ -->
+<section class="support-section scroll-fade" id="support-section">
+  <div class="section-inner">
+    <div class="section-label">サポート</div>
+    <p class="section-sub">ドキュメントやサンプルプログラム等もご用意しております。</p>
+
+    <div class="support-grid">
+
+      <div class="support-card">
+        <img src="img/support_doc.png" alt="ドキュメント" onerror="this.style.display='none'">
+        <p>導入方法やAPIの詳細を紹介します。</p>
+        <a href="https://ailia-ai.github.io/ailia-sdk/supplemental/speech/cpp/jp/" target="_blank">ドキュメント</a>
+      </div>
+
+      <div class="support-card">
+        <img src="img/support_sample.png" alt="サンプルプログラム" onerror="this.style.display='none'">
+        <p>APIの使用例を紹介します。</p>
+        <a href="https://medium.com/axinc/ailia-speech-unity%E3%82%84c-%E3%81%8B%E3%82%89%E4%BD%BF%E7%94%A8%E3%81%A7%E3%81%8D%E3%82%8Bai%E9%9F%B3%E5%A3%B0%E8%AA%8D%E8%AD%98%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%82%AA-16a05b5280d2" target="_blank">サンプルプログラム</a>
+      </div>
+
+      <div class="support-card">
+        <img src="img/support_slack.png" alt="サポートSlack" onerror="this.style.display='none'">
+        <p>チャットで気軽に質問できます。</p>
+        <a href="https://join.slack.com/t/axinc-ailia/shared_invite/zt-f5hboxhj-kZ~APYIHTHeSopL5NWqGtA" target="_blank">サポートSlack</a>
+      </div>
+
+      <div class="support-card primary">
+        <img src="img/support_pc.png" alt="デモ" onerror="this.style.display='none'">
+        <p>30日間無料デモアプリダウンロード</p>
+        <a href="https://axip-console.appspot.com/trial/terms/AILIA-SPEECH?lang=ja">AIを使ってみる</a>
+      </div>
+
+      <div class="support-card primary">
+        <img src="img/support_chat.png" alt="相談" onerror="this.style.display='none'">
+        <p>無料個別相談にも対応しています。</p>
+        <a href="https://ailia.ai/contact/" target="_blank">導入のご相談</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ アイリア WORKS ════════ -->
+<section class="works-section scroll-fade">
+  <img src="img/dev_bg_pc.jpg" class="works-bg" alt="">
+  <div class="works-inner">
+    <div class="works-logo">
+      <img src="img/logo_ailiaworks.png" alt="ailia WORKS">
+    </div>
+    <h2 class="works-title">AI開発支援サービス「アイリア WORKS」</h2>
+    <p class="works-text">
+      AI開発支援サービス「アイリア WORKS」<br>
+      AI技術の提供だけでなく、様々なAI開発支援を通して<br>
+      お客様に最適な課題解決をご提案。<br>
+      議事録機能の実装や音声操作機能の開発など、<br>
+      お客様のあらゆるニーズにお応えします。
+    </p>
+    <a class="btn btn--works" href="https://ailia.ai/solutions/ailia_works.html">
+      <span class="btn-icon">→</span>詳しくはこちら
+    </a>
+  </div>
+</section>
+
+<!-- ════════ 採用企業 ════════ -->
+<section class="companies scroll-fade">
+  <div class="section-inner">
+    <div class="section-label">アイリア SDK 採用企業一覧</div>
+    <div class="logos-spacer"></div>
+    <div class="logos-row">
+      <img src="https://www.ailia.ai/hubfs/ailia_img/company_ask.png" alt="ASK" onerror="this.style.display='none'">
+      <img src="https://www.ailia.ai/hubfs/ailia_img/company_celsys.png" alt="Celsys" onerror="this.style.display='none'">
+      <img src="https://www.ailia.ai/hubfs/ailia_img/company_konica.png" alt="KONICA MINOLTA" onerror="this.style.display='none'">
+      <img src="https://www.ailia.ai/hubfs/ailia_img/company_randido.png" alt="Randido" onerror="this.style.display='none'">
+      <img src="https://www.ailia.ai/hubfs/ailia_img/company_sega.png" alt="SEGA" onerror="this.style.display='none'">
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+        <footer>
+
+            <div class="cw">
+                <div class="wrap">
+                    <div class="left">
+                        <div class="col">
+                            <a href="/">アイリアAIシリーズ</a>
+                            <a href="/dx/">アイリア DX Insight</a>
+                            <a href="/sdk/">アイリア SDK</a>
+                            <a href="https://ailia.ai/voice">アイリア AI VOICE</a>
+                            <a href="https://ailia.ai/speech">アイリア AI SPEECH</a>
+                            <a href="/embedded/">アイリア Embedded AI</a>
+                        </div>
+                        <div class="col">
+                            <a href="/ai-computing/">AIコンピューティング</a>
+                            <a href="/ai-computing/ai-deeplearning-acceleration/">AI・深層学習向け高速化</a>
+                            <a href="/ai-computing/embedded-acceleration/">組込み高速化</a>
+                            <a href="/ai-computing/image-processing-acceleration/">画像処理高速化</a>
+                            <a href="/ai-computing/gpu-acceleration/">GPU向け高速化</a>
+                        </div>
+                        <div class="col">
+                            <a href="/ai-application/">AIアプリケーション</a>
+                            <a href="https://blog.ailia.ai/pickup/ailia-ai-agent-01/">AIエージェント</a>
+                        </div>
+                        <div class="col">
+                            <a href="/company/">会社情報</a>
+                            <a href="https://www.axell.co.jp/browser/">利用規約</a>
+                            <a href="https://www.axell.co.jp/privacy/">プライバシーポリシー</a>
+                            <a href="/trademarks/">商標について</a>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <p class="company">アイリア株式会社</p>
+                        <p class="address">〒150-0032　東京都渋谷区鶯谷町19-22　塗装会館5F</p>
+                        <p class="btnWrap">
+                            <a class="btn btnContact" href="https://ailia.ai/contact/" target="_blank">
+                                <span class="icon"><img src="img/common/icon_contact.svg" alt=""></span>
+                                <span class="label">お問い合わせ</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bannerArea">
+                    <a href="https://blog.ailia.ai/" target="_blank">
+                        <img src="img/common/footer_banner_01.webp" alt="AIでしごとするなら「AI専門メディア」">
+                    </a>
+                    <a href="https://ailia.ai/sdk/" target="_blank">
+                        <img src="img/common/footer_banner_02.webp" alt="ソフトウェア開発きっとアイリアSDK">
+                    </a>
+
+                </div>
+
+            </div>
+            <p class="copyright">Copyright &copy; アイリア株式会社 / 株式会社アクセル</p>
+        </footer>
+
+<script src="js/main.js"></script>
+<script src="./js/header.js"></script>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
+
+  let lastScrollY = window.scrollY;
+  const subNav = document.getElementById('subNavArea');
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > lastScrollY && currentScrollY > 200) {
+      subNav.classList.add('subnav--hidden');
+    } else {
+      subNav.classList.remove('subnav--hidden');
+    }
+    lastScrollY = currentScrollY;
+  });
+</script>
+
+</body>
+</html>
