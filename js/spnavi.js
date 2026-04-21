@@ -1,14 +1,23 @@
+$(document).ready(function(){
+  if (window.matchMedia('(max-width: 1023px)').matches) {
 
-$(function(){
-	if (window.matchMedia('(max-width: 767px)').matches) {
-		
-		$(function() {
-	$('.head01btn a').on('click',function(){	
-		$('.head01nav').slideToggle('fast');
-		$('.head01btn a').toggleClass('open');
-		return false;
-	});
+    $('.spNavBtn').on('click', function(){
+      $('.navArea').toggleClass('active');
+      $(this).toggleClass('active');
 
+      if ($('.navArea').hasClass('active')) {
+        $('.navArea .navList li').each(function(i){
+          var $li = $(this);
+          setTimeout(function(){
+            $li.addClass('visible');
+          }, i * 80);
+        });
+      } else {
+        $('.navArea .navList li').removeClass('visible');
+      }
+
+      return false;
+    });
+
+  }
 });
-
-}})

@@ -430,6 +430,13 @@ a.movielink {
 		border-radius: 35px;
 		box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.1);
 	}
+	@media screen and (max-width:767px) {
+  /* あいにゃん縦伸び解消 */
+  #chatbtn .chara img.sp {
+    width: 60px;
+    height: auto;
+  }
+}
 	#chatbtn .chatbtnbox {
 		cursor: pointer;
 	}
